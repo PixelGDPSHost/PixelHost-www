@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import {NextUIProvider} from '@nextui-org/react'
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,8 @@ export default function RootLayout({ Component, pageProps }) {
                   </center>
                   <hr className="hr"/>
                   <h1 className="text-[20px] font-bold">О нас</h1>
-                  <a className="cursor-pointer" href="/terms">Политика конфидициальности</a><br/>
-                  <a className="cursor-pointer">Мониторинг</a><br/>
+                  <Link className="cursor-pointer" href="/terms">Политика конфидициальности</Link><br/>
+                  <Link className="cursor-pointer" href="https://status.pixelhost.one/">Мониторинг</Link><br/>
                   <div className="flex mt-[40px]">
                       <img src="https://cdn.pixelhost.one/image%204.png"/>
                       <img src="https://cdn.pixelhost.one/image%205.png"/>
