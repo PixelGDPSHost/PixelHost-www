@@ -57,6 +57,7 @@ body {
   font-style: normal;
   font-variation-settings:
           "slnt" 0;
+  scroll-behavior: smooth;
 }
 
 nav {
@@ -129,4 +130,26 @@ nav {
   background:linear-gradient(to left, #7FCCD1, #69AFC8);
   -webkit-background-clip: text;
   color: transparent;
+}
+
+.flexo {
+  display: flex;
+}
+
+.flexoc {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 699px) {
+  .flexoc {
+    display: block;
+  }
+  .flexo {
+    display: block;
+  }
+}
+
+bgg {
+  background: linear-gradient(to bottom, #1E1B26, #070709);
 }

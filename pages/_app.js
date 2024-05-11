@@ -21,7 +21,14 @@ export default function RootLayout({ Component, pageProps }) {
                       <p className="ftext font-semibold">© Copyright Infinitium 2022-2024</p>
                   </center>
                   <hr className="hr"/>
-                    <h1 className="text-3xl">Скоро...</h1>
+                  <h1 className="text-[20px] font-bold">О нас</h1>
+                  <a className="cursor-pointer" href="/terms">Политика конфидициальности</a><br/>
+                  <a className="cursor-pointer">Мониторинг</a><br/>
+                  <div className="flex mt-[40px]">
+                      <img src="https://cdn.pixelhost.one/image%204.png"/>
+                      <img src="https://cdn.pixelhost.one/image%205.png"/>
+                      <img src="https://cdn.pixelhost.one/image%206.png"/>
+                  </div>
               </footer>
           </NextUIProvider>
   );
