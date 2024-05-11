@@ -1,108 +1,132 @@
-@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none;
-
-  background-color: #040404;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%230E0E0E' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23333333'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
-}
-::-webkit-scrollbar {
-  width: 0;
-}
-.branding{
-  font-family: "Anta", sans-serif;
+.istok-web-regular {
+  font-family: "Istok Web", sans-serif;
   font-weight: 400;
   font-style: normal;
-  background: linear-gradient(120deg, #ff0000, #ffa500);
-  animation: fade-Up 1s ease-in-out;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
-@keyframes fade-Up {
-  0%{
-    transform: translate(0, -200%);
+
+.istok-web-bold {
+  font-family: "Istok Web", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.istok-web-regular-italic {
+  font-family: "Istok Web", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.istok-web-bold-italic {
+  font-family: "Istok Web", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+* {
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    background: #121017;
   }
 }
-.ph-navbar{
-  margin: 6px;
-  z-index: 100;
-  position: sticky;
-  top: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  padding: 13px;
-  background: rgba(24, 24, 24, 0.15);
-  backdrop-filter: blur(15px);
-  border-radius: 10px;
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #121017;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+          "slnt" 0;
 }
-.ph-nav-content {
+
+nav {
+  position: fixed;
+  background: rgba(24, 22, 26, 0.75);
+  height: 52px;
+  width: 100%;
+  padding: 10px;
   display: flex;
-  justify-content: space-between;
+  text-align: center;
+  align-content: center;
   align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(4px);
+}
+
+.logo {
+  width: 34px;
+  height: 34px;
+  margin-right: 4px;
+}
+
+.pixelhost {
+  font-weight: bold;
+  background:linear-gradient(to left, #7FCCD1, #5B8BD1);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 24px;
+  z-index: 9999;
 }
 
 .account {
-  position: relative; /* Добавляем position: relative */
-  background-color: rgba(23, 23, 23, 0.26);
-  backdrop-filter: blur(15px);
-  padding: 6px;
-  width: 120px;
-  transition: .3s ease-in-out;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-.account:hover {
-  transition: .3s ease-in-out;
-  position: relative; /* Добавляем position: relative */
-  background-color: rgba(40, 40, 40, 0.47);
-  backdrop-filter: blur(15px);
-  padding: 6px;
-  width: 120px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  width: 39px;
+  height: 39px;
+  background: black;
+  border-radius: 9999px;
+  padding: 7px;
 }
 
-.account p {
-  position: absolute; /* Добавляем position: absolute */
-  top: 49%; /* Размещаем текст по вертикали в центре */
-  transform: translateY(-50%); /* Корректируем положение текста */
-  left: 10px; /* Сдвигаем текст немного влево */
-  margin-left: 30px; /* Убираем внешние отступы */
-}
-.account-ico{
-  width: 26.5px;
-
+.account {
+  order: 1;
 }
 
-@keyframes fade-Up {
-  0%{
-    transform: translate(0, -200%);
-  }
+.account-icon {
+  width: 25px;
+  height: 25px;
 }
 
-.ph-buttons {
-  flex-grow: 1;
-  text-align: right;
+.skid {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(13, 11, 17, 0), #121017),url("https://cdn.pixelhost.one/Rectangle%2078.png");
+  background-size: cover;
 }
 
-.ph-games{
-  padding: 30px;
+.pixelhostbig {
+  font-weight: bold;
+  background:linear-gradient(to left, #7FCCD1, #5B8BD1);
+  color: transparent;
+  -webkit-background-clip: text;
 }
-@media (max-width: 976px) {
-  .optimize{
-    display: flex;
 
-  }
-}
-.accountbox{
-  background-color: #040404;
-  padding: 30px;
+.ftext {
+  background:linear-gradient(to left, #7FCCD1, #69AFC8);
+  -webkit-background-clip: text;
+  color: transparent;
 }
