@@ -34,7 +34,7 @@ export default function Home() {
                     <Tab key="discord" title="Discord" className="flex">
                             <TDCard ozu="512 MB" title="Code" price="29" backup="1 Бэкап" db="1 БД" disk="3 ГБ"></TDCard>
                             <TDCard ozu="1 GB" title="Nexus" price="39" backup="1 Бэкап" db="2 БД" disk="7 ГБ"></TDCard>
-                            <TDCard ozu="512 MB" title="Code" price="49" backup="1 Бэкап" db="1 БД" disk="3 ГБ"></TDCard>
+                            <TDCard ozu="2 GB" title="Byte" price="49" backup="3 Бэкап" db="3 БД" disk="12 ГБ"></TDCard>
                     </Tab>
                 </Tabs>
             </div>
