@@ -2,13 +2,27 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import {NextUIProvider} from '@nextui-org/react'
 import Link from "next/link";
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ Component, pageProps }) {
   return (
           <NextUIProvider>
-              <nav>
+              <ToastContainer
+                  position="bottom-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="dark"
+              />
+              <nav className="z-40">
                   <img src="https://cdn.pixelhost.one/pixel.png" className="logo" />
                   <p className="pixelhost">PixelHost</p>
                   <div className="account">

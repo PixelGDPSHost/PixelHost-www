@@ -1,6 +1,6 @@
 import Image from "next/image";
 import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
-import {SCard} from "@/components/Components"
+import {SCard, TDCard} from "@/components/Components"
 
 export default function Home() {
   return (
@@ -31,12 +31,10 @@ export default function Home() {
                             </CardBody>
                         </Card>
                     </Tab>
-                    <Tab key="discord" title="Discord">
-                        <Card>
-                            <CardBody>
-                                Скоро, 20.06.2024
-                            </CardBody>
-                        </Card>
+                    <Tab key="discord" title="Discord" className="flex">
+                            <TDCard ozu="512 MB" title="Code" price="29" backup="1 Бэкап" db="1 БД" disk="3 ГБ"></TDCard>
+                            <TDCard ozu="1 GB" title="Nexus" price="39" backup="1 Бэкап" db="2 БД" disk="7 ГБ"></TDCard>
+                            <TDCard ozu="512 MB" title="Code" price="49" backup="1 Бэкап" db="1 БД" disk="3 ГБ"></TDCard>
                     </Tab>
                 </Tabs>
             </div>
