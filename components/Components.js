@@ -17,7 +17,7 @@ export const SCard = ({title, lower, iconimg}) => {
     );
 }
 
-export const TDCard = ({title, price, ozu, disk, db, backup, lower}) => {
+export const TDCard = ({ title, price, ozu, disk, db, backup, lower, color }) => {
     const notify = () => {
         toast.error('Жди до 20.06.2024!', {
             position: "bottom-right",
@@ -31,23 +31,24 @@ export const TDCard = ({title, price, ozu, disk, db, backup, lower}) => {
             transition: Bounce,
         });
     }
+
     return (
-      <div>
-        <div className="card-discord mr-[32px]">
-            <h1 className="font-light text-3xl mb-[17.4px]">{title}</h1>
-            <div className="flex text-center mb-[33px] items-center">
-                <p>{price} ₽</p>
-                <p className="text-[12px]">/ Месяц</p>
+        <div>
+            <div className="card-discord" style={{ borderTop: `15px solid ${color}` }}>
+                <h1 className="font-light text-3xl mb-[17.4px]">{title}</h1>
+                <div className="flex text-center mb-[33px] items-center">
+                    <p>{price} ₽</p>
+                    <p className="text-[12px]">/ Месяц</p>
+                </div>
+                <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.pixelhost.one/icons228%2FMemory%20Slot.png" alt="ОЗУ"></img>ОЗУ: {ozu}</p>
+                <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.pixelhost.one/icons228%2FHDD.png" alt="Диск"></img>Диск: {disk}</p>
+                <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.pixelhost.one/icons228%2FDatabase.png" alt="БД"></img>БД: {db}</p>
+                <p className="flex"><img className="w-[25px] h-[25px] mb-[31px]" src="https://cdn.pixelhost.one/icons228%2FCloud%20Storage.png" alt="Бэкапы"></img>Бэкапы: {backup}</p>
+                <p>{lower}</p>
+                <Button color="primary" onClick={notify}>
+                    Выбрать
+                </Button>
             </div>
-            <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.pixelhost.one/icons228%2FMemory%20Slot.png"></img>ОЗУ: {ozu}</p>
-            <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.pixelhost.one/icons228%2FHDD.png"></img>Диск: {disk}</p>
-            <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.pixelhost.one/icons228%2FDatabase.png"></img>БД: {db}</p>
-            <p className="flex"><img className="w-[25px] h-[25px] mb-[31px]" src="https://cdn.pixelhost.one/icons228%2FCloud%20Storage.png"></img>Бэкапы: {backup}</p>
-            <p>{lower}</p>
-            <Button color="primary" onClick={notify}>
-                Выбрать
-            </Button>
         </div>
-      </div>
     );
 }
