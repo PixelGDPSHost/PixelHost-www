@@ -6,7 +6,6 @@ import Link from "next/link";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useRouter} from "next/router";
-import {router} from "next/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
