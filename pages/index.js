@@ -31,15 +31,17 @@ export default function Home() {
                             </CardBody>
                         </Card>
                     </Tab>
-                    <Tab key="discord" title="Discord" className="flex">
-                            <TDCard ozu="512 MB" title="Code" price="29" backup="1 Бэкап" db="1 БД" disk="3 ГБ"></TDCard>
-                            <TDCard ozu="1 GB" title="Nexus" price="39" backup="1 Бэкап" db="2 БД" disk="7 ГБ"></TDCard>
-                            <TDCard ozu="2 GB" title="Byte" price="49" backup="3 Бэкап" db="3 БД" disk="12 ГБ"></TDCard>
+                    <Tab key="discord" title="Discord">
+                        <div className="flexon">
+                            <TDCard ozu="512 MB" title="Code" price="29" backup="1 Бэкап" db="1 БД" disk="3 ГБ" color="#00BA77"></TDCard>
+                            <TDCard ozu="1 GB" title="Nexus" price="39" backup="1 Бэкап" db="2 БД" disk="7 ГБ" color="#008DBA"></TDCard>
+                            <TDCard ozu="2 GB" title="Byte" price="49" backup="3 Бэкап" db="3 БД" disk="12 ГБ" color="#6800BA"></TDCard>
+                        </div>
                     </Tab>
                 </Tabs>
             </div>
         </center>
-        <h1 className="text-4xl font-semibold mt-10 ml-10 mb-[78.2px]">Почему вы должны выбрать нас?</h1>
+        <h1 className="text-4xl font-semibold mt-10 poch mb-[78.2px]">Почему вы должны выбрать нас?</h1>
         <div className="flexo">
             <div>
                 <SCard title="DDoS Защита" lower="Все сервера находятся под профессиональной защитой от DDoS на уровнях L3 - L4 и L7" iconimg="Shield.png"></SCard>
