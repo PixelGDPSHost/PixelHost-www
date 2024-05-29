@@ -32,7 +32,7 @@ export default function Home() {
                         </Card>
                     </Tab>
                     <Tab key="discord" title="Discord">
-                        <div className="flexo">
+                        <div className="flexon">
                             <TDCard ozu="512 MB" title="Code" price="29" backup="1 Бэкап" db="1 БД" disk="3 ГБ" color="#00BA77"></TDCard>
                             <TDCard ozu="1 GB" title="Nexus" price="39" backup="1 Бэкап" db="2 БД" disk="7 ГБ" color="#008DBA"></TDCard>
                             <TDCard ozu="2 GB" title="Byte" price="49" backup="3 Бэкап" db="3 БД" disk="12 ГБ" color="#6800BA"></TDCard>

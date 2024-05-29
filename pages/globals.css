@@ -166,11 +166,19 @@ nav {
   margin-right: 32px;
 }
 
+.flexon {
+  display: flex;
+}
+
 @media (max-width: 820px) {
   .flexoc {
     display: block;
   }
   .flexo {
+    display: block;
+    margin-left: -18px;
+  }
+  .flexon {
     display: block;
     margin-left: -18px;
   }
@@ -185,6 +193,9 @@ nav {
 
 @media (max-width: 1180px) {
   .flexo {
+    margin-left: -18px;
+  }
+  .flexon {
     margin-left: -18px;
   }
   .poch {
