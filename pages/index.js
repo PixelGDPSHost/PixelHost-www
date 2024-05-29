@@ -41,19 +41,21 @@ export default function Home() {
                 </Tabs>
             </div>
         </center>
-        <h1 className="text-4xl font-semibold mt-10 poch mb-[78.2px]">Почему вы должны выбрать нас?</h1>
-        <div className="flexo">
-            <div>
-                <SCard title="DDoS Защита" lower="Все сервера находятся под профессиональной защитой от DDoS на уровнях L3 - L4 и L7" iconimg="Shield.png"></SCard>
-                <SCard title="Ядро PixelCore" lower="Наше собственное ядро GDPS, поддерживает 2.2, гибкая настройка, своя музыка - и не только" iconimg="Geometry%20Dash.png"></SCard>
-                <SCard title="Быстрая техподдержка" lower="Мы всегда готовы помочь нашим клиентам в любых трудностях при настройке сервера" iconimg="Ask%20Question.png"></SCard>
+        <center className="flex flex-col items-center">
+            <h1 className="text-4xl font-semibold mt-10 mb-[78.2px]">Почему вы должны выбрать нас?</h1>
+            <div className="flexo">
+                <div>
+                    <SCard title="DDoS Защита" lower="Все сервера находятся под профессиональной защитой от DDoS на уровнях L3 - L4 и L7" iconimg="Shield.png"></SCard>
+                    <SCard title="Ядро PixelCore" lower="Наше собственное ядро GDPS, поддерживает 2.2, гибкая настройка, своя музыка - и не только" iconimg="Geometry%20Dash.png"></SCard>
+                    <SCard title="Быстрая техподдержка" lower="Мы всегда готовы помочь нашим клиентам в любых трудностях при настройке сервера" iconimg="Ask%20Question.png"></SCard>
+                </div>
+                <div className="flexoc">
+                    <SCard title="Высокий Uptime" lower="Все наши сервера работают 24/7 круглые сутки с айптаймом 99.98%" iconimg="Server%20clocks%20and%20database.png"></SCard>
+                    <SCard title="Простая панель" lower="В нашей удобной и функциональной панели удобная настройка сундуков, ролей, музыки, и т.д." iconimg="Dashboard%20Layout.png"></SCard>
+                    <SCard title="Цена - качество" lower="Качественный хостинг за небольшую цену предоставляет удобную панель, большой функционал, и тому подобное" iconimg="Banknotes.png"></SCard>
+                </div>
             </div>
-            <div className="flexoc">
-                <SCard title="Высокий Uptime" lower="Все наши сервера работают 24/7 круглые сутки с айптаймом 99.98%" iconimg="Server%20clocks%20and%20database.png"></SCard>
-                <SCard title="Простая панель" lower="В нашей удобной и функциональной панели удобная настройка сундуков, ролей, музыки, и т.д." iconimg="Dashboard%20Layout.png"></SCard>
-                <SCard title="Цена - качество" lower="Качественный хостинг за небольшую цену предоставляет удобную панель, большой функционал, и тому подобное" iconimg="Banknotes.png"></SCard>
-            </div>
-        </div>
+        </center>
     </main>
   );
 }
