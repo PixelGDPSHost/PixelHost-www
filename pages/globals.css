@@ -220,3 +220,18 @@ bgg {
   height: 3px;
   background: linear-gradient(to right bottom, #396FFA, #20F3CD);
 }
+
+.stupidcenter {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.logindiv {
+  width: calc(426px*1.1);
+  height: auto;
+  padding: 14px 18px 14px 18px;
+  background: black;
+  border-radius: 10px;
+}
