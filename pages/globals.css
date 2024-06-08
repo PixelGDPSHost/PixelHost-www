@@ -171,6 +171,37 @@ nav {
   display: flex;
 }
 
+.stupidcenter {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.logindiv {
+  width: calc(426px*1.1);
+  height: auto;
+  padding: 14px 18px 14px 18px;
+  background: black;
+  border-radius: 10px;
+}
+
+.mb-optimize {
+  margin-bottom: 0;
+}
+
+.ml-optimize {
+  margin-left: 15px;
+}
+
+.w-optimize {
+  width: 100%;
+}
+
+.flexop {
+  display: flex;
+}
+
 @media (max-width: 820px) {
   .flexoc {
     display: block;
@@ -178,6 +209,12 @@ nav {
   .flexo {
     display: block;
     margin-left: -18px;
+  }
+  .flexop {
+    width: calc(145px*2);
+  }
+  .idinahui {
+    width: calc(145px*2);
   }
   .flexon {
     display: block;
@@ -189,6 +226,18 @@ nav {
   .card-discord {
     margin-right: 0px;
     margin-bottom: 15px;
+  }
+  .logindiv {
+    width: 326px;
+  }
+  .mb-optimize {
+    margin-bottom: 0;
+  }
+  .ml-optimize {
+    margin-left: 0;
+  }
+  .w-optimize {
+    width: 145px;
   }
 }
 
@@ -219,19 +268,4 @@ bgg {
   border: 0;
   height: 3px;
   background: linear-gradient(to right bottom, #396FFA, #20F3CD);
-}
-
-.stupidcenter {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-}
-
-.logindiv {
-  width: calc(426px*1.1);
-  height: auto;
-  padding: 14px 18px 14px 18px;
-  background: black;
-  border-radius: 10px;
 }

@@ -39,8 +39,8 @@ export default function RootLayout({ Component, pageProps }) {
                       <img src="https://cdn.pixelhost.one/pixel.png" className="logo" onClick={gotomain}/>
                       <p className="pixelhost">PixelHost</p>
                   </div>
-                  <div className="account">
-                      <img className="account-icon istok-web-bold" src="https://cdn.pixelhost.one/Account.png" alt="Account Icon" onClick={gotologin}/>
+                  <div className="account" onClick={gotologin}>
+                      <img className="account-icon istok-web-bold" src="https://cdn.pixelhost.one/Account.png" alt="Account Icon"/>
                   </div>
               </nav>
               <Component {...pageProps} />
