@@ -77,17 +77,6 @@ export default function Home() {
                 />
                 <Input
                     isClearable
-                    type="name"
-                    label="Юзернейм"
-                    variant="bordered"
-                    placeholder="user123123"
-                    defaultValue=""
-                    onClear={() => console.log("input cleared")}
-                    className="w-full mb-[11px]"
-                    onChange={(e) => setUName(e.target.value)}
-                />
-                <Input
-                    isClearable
                     type="text"
                     label="Имя"
                     variant="bordered"
@@ -96,6 +85,17 @@ export default function Home() {
                     onClear={() => console.log("input cleared")}
                     className="w-full mb-[11px]"
                     onChange={(e) => setName(e.target.value)}
+                />
+                <Input
+                    isClearable
+                    type="name"
+                    label="Юзернейм"
+                    variant="bordered"
+                    placeholder="user123123"
+                    defaultValue=""
+                    onClear={() => console.log("input cleared")}
+                    className="w-full mb-[11px]"
+                    onChange={(e) => setUName(e.target.value)}
                 />
                 <Input
                     label="Пароль"
