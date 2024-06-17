@@ -34,7 +34,7 @@ export default function Home() {
                 mail: email,
                 uname: uname,
                 name: name,
-                pass: password,
+                passwd: password,
             }).catch(function (error) {
                 toast.error("Что-то пошло не так, Проверьте ли правильный пароль и юзернейм")
             })
