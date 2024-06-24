@@ -61,7 +61,7 @@ export default function RootLayout({ Component, pageProps }) {
                       <img src="https://cdn.pixelhost.one/image%205.png"/>
                       <img src="https://cdn.pixelhost.one/image%206.png"/>
                       <a href="https://freekassa.ru" target="_blank" rel="noopener noreferrer">
-                        <img src="https://cdn.freekassa.ru/banners/small-dark-2.png" title="Прием платежей">
+                        <img src="https://cdn.freekassa.ru/banners/small-dark-2.png" title="Прием платежей" />
                       </a>
                   </div>
               </footer>
