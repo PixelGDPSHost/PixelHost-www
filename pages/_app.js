@@ -20,6 +20,9 @@ export default function RootLayout({ Component, pageProps }) {
     const gotologin = () => {
         r.push("/panel/login")
     }
+    const gotoBobsbin = () => {
+        r.push("https://tenor.com/view/братюльники-pexwer-pexwer9-братцы-брат-gif-12471208367258920906")
+    }
   return (
           <NextUIProvider>
               <ToastContainer
@@ -53,7 +56,7 @@ export default function RootLayout({ Component, pageProps }) {
                   <h1 className="text-[20px] font-bold mt-[10px]">О нас</h1>
                   <p className="cursor-pointer" onClick={gototerms}>Политика конфидициальности</p>
                   <Link className="cursor-pointer" href="https://status.pixelhost.one/">Мониторинг</Link><br/>
-                  <div className="flex mt-[40px]">
+                  <div className="flex mt-[40px]" onClick={gotoBobsbin}>
                       <img src="https://cdn.pixelhost.one/image%204.png"/>
                       <img src="https://cdn.pixelhost.one/image%205.png"/>
                       <img src="https://cdn.pixelhost.one/image%206.png"/>
