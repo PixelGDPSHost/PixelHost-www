@@ -39,17 +39,17 @@ export default function RootLayout({ Component, pageProps }) {
               />
               <nav className="z-40">
                   <div className="flex">
-                      <img src="https://cdn.pixelhost.one/pixel.png" className="logo" onClick={gotomain}/>
+                      <img src="https://cdn.bytenode.cc/pixel.png" className="logo" onClick={gotomain}/>
                       <p className="pixelhost">PixelHost</p>
                   </div>
                   <div className="account" onClick={gotologin}>
-                      <img className="account-icon istok-web-bold cursor-pointer" src="https://cdn.pixelhost.one/Account.png" alt="Account Icon"/>
+                      <img className="account-icon istok-web-bold cursor-pointer" src="https://cdn.bytenode.cc/Account.png" alt="Account Icon"/>
                   </div>
               </nav>
               <Component {...pageProps} />
               <footer className="bg-black h-[311px] p-[35px]">
                   <center>
-                      <img src="https://cdn.pixelhost.one/pixel.png" className="logo mb-[4px]" />
+                      <img src="https://cdn.bytenode.cc/pixel.png" className="logo mb-[4px]" />
                       <p className="ftext font-semibold">© Copyright Infinitium 2022-2024</p>
                   </center>
                   <hr className="hr"/>
@@ -57,9 +57,9 @@ export default function RootLayout({ Component, pageProps }) {
                   <p className="cursor-pointer" onClick={gototerms}>Политика конфидициальности</p>
                   <Link className="cursor-pointer" href="https://status.pixelhost.one/">Мониторинг</Link><br/>
                   <div className="flex mt-[40px]" onClick={gotoBobsbin}>
-                      <img src="https://cdn.pixelhost.one/image%204.png"/>
-                      <img src="https://cdn.pixelhost.one/image%205.png"/>
-                      <img src="https://cdn.pixelhost.one/image%206.png"/>
+                      <img src="https://cdn.bytenode.cc/image%204.png"/>
+                      <img src="https://cdn.bytenode.cc/image%205.png"/>
+                      <img src="https://cdn.bytenode.cc/image%206.png"/>
                       <a href="https://freekassa.ru" target="_blank" rel="noopener noreferrer">
                         <img src="https://cdn.freekassa.ru/banners/small-dark-2.png" title="Прием платежей" />
                       </a>

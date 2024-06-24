@@ -7,7 +7,7 @@ export default function Home() {
     <main className="dark text-foreground">
       <div className="skid">
         <center>
-            <h1 className="text-5xl font-semibold pixelhostbig">PixelHost</h1>
+            <h1 className="text-5xl font-semibold pixelhostbig">ByteNode</h1>
             <p className="font-light text-2xl">
                 Лучший хостинг GDPS и Minecraft серверов с защитой от DDoS
             </p>
@@ -20,7 +20,7 @@ export default function Home() {
                     <Tab key="gdps" title="GDPS">
                         <Card>
                             <CardBody>
-                                Скоро, 20.06.2024
+                                Скоро, 30.06.2024
                             </CardBody>
                         </Card>
                     </Tab>

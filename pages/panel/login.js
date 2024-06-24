@@ -28,7 +28,7 @@ export default function Home() {
 
     const doLogin = () => {
         try {
-            const resp = axios.post("https://api.pixelhost.one/v1/login", {
+            const resp = axios.post("https://api.bytenode.cc/v1/login", {
                 mail: email,
                 pass: password,
             }).catch(function (error) {
