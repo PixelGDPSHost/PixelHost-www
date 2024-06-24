@@ -16,7 +16,7 @@ export default function Home() {
         <center>
             <h1 className="text-4xl font-semibold">Тарифы:</h1>
             <div className="flex w-full flex-col justify-center items-center mt-5">
-                <Tabs aria-label="Options" color="primary">
+                <Tabs aria-label="Options" color="primary" variant="bordered">
                     <Tab key="gdps" title="GDPS">
                         <Card>
                             <CardBody>
