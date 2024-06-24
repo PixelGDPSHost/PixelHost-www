@@ -52,7 +52,7 @@ export default function Home() {
         }
     }
 
-    if (Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH") !== undefined) {
+    if (Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA") !== undefined) {
         router.push("/panel")
     }
 

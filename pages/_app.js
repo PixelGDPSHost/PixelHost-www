@@ -40,7 +40,7 @@ export default function RootLayout({ Component, pageProps }) {
               <nav className="z-40">
                   <div className="flex">
                       <img src="https://cdn.bytenode.cc/pixel.png" className="logo" onClick={gotomain}/>
-                      <p className="pixelhost">PixelHost</p>
+                      <p className="pixelhost">ByteNode</p>
                   </div>
                   <div className="account" onClick={gotologin}>
                       <img className="account-icon istok-web-bold cursor-pointer" src="https://cdn.bytenode.cc/Account.png" alt="Account Icon"/>
