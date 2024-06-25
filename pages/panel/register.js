@@ -30,7 +30,7 @@ export default function Home() {
 
     const doReg = () => {
         try {
-            const resp = axios.post("https://api.pixelhost.one/v1/register", {
+            const resp = axios.post("https://api.bytenode.cc/v1/register", {
                 mail: email,
                 uname: uname,
                 name: name,
@@ -56,7 +56,7 @@ export default function Home() {
         }
     }
 
-    if (Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH") !== undefined) {
+    if (Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA") !== undefined) {
         router.push("/panel")
     }
 
@@ -69,7 +69,7 @@ export default function Home() {
                     type="email"
                     label="Почта"
                     variant="bordered"
-                    placeholder="user@pixelhost.one"
+                    placeholder="user@bytenode.cc"
                     defaultValue=""
                     onClear={() => console.log("input cleared")}
                     className="w-full mb-[11px]"

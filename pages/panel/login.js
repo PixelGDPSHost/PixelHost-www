@@ -28,7 +28,7 @@ export default function Home() {
 
     const doLogin = () => {
         try {
-            const resp = axios.post("https://api.pixelhost.one/v1/login", {
+            const resp = axios.post("https://api.bytenode.cc/v1/login", {
                 mail: email,
                 pass: password,
             }).catch(function (error) {
@@ -52,7 +52,7 @@ export default function Home() {
         }
     }
 
-    if (Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH") !== undefined) {
+    if (Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA") !== undefined) {
         router.push("/panel")
     }
 

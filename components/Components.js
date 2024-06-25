@@ -3,7 +3,7 @@ import {Button} from "@nextui-org/react";
 import {Bounce, toast} from "react-toastify";
 
 export const SCard = ({title, lower, iconimg}) => {
-    const niconimg = "https://cdn.pixelhost.one/" + iconimg
+    const niconimg = "https://cdn.bytenode.cc/" + iconimg
     return (
         <div className="flex items-center ml-10 mb-[43.72px] font-medium">
             <div className="w-[80px] h-[79.48px] bg-[#171D29] mr-[25px] justify-center items-center flex rounded-[15px]">
@@ -40,10 +40,10 @@ export const TDCard = ({ title, price, ozu, disk, db, backup, lower, color }) =>
                     <p>{price} ₽</p>
                     <p className="text-[12px]">/ Месяц</p>
                 </div>
-                <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.pixelhost.one/icons228%2FMemory%20Slot.png" alt="ОЗУ"></img>ОЗУ: {ozu}</p>
-                <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.pixelhost.one/icons228%2FHDD.png" alt="Диск"></img>Диск: {disk}</p>
-                <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.pixelhost.one/icons228%2FDatabase.png" alt="БД"></img>БД: {db}</p>
-                <p className="flex"><img className="w-[25px] h-[25px] mb-[31px]" src="https://cdn.pixelhost.one/icons228%2FCloud%20Storage.png" alt="Бэкапы"></img>Бэкапы: {backup}</p>
+                <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.bytenode.cc/icons228%2FMemory%20Slot.png" alt="ОЗУ"></img>ОЗУ: {ozu}</p>
+                <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.bytenode.cc/icons228%2FHDD.png" alt="Диск"></img>Диск: {disk}</p>
+                <p className="flex"><img className="w-[25px] h-[25px] mb-[18px]" src="https://cdn.bytenode.cc/icons228%2FDatabase.png" alt="БД"></img>БД: {db}</p>
+                <p className="flex"><img className="w-[25px] h-[25px] mb-[31px]" src="https://cdn.bytenode.cc/icons228%2FCloud%20Storage.png" alt="Бэкапы"></img>Бэкапы: {backup}</p>
                 <p>{lower}</p>
                 <Button color="primary" onClick={notify}>
                     Выбрать
