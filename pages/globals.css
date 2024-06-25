@@ -85,14 +85,43 @@ nav {
   cursor: pointer;
 }
 
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 400% 400%;
+  }
+}
+
 .pixelhost {
   font-weight: bold;
-  background:linear-gradient(to left, #7FCCD1, #5B8BD1);
+  background-image: linear-gradient(
+          to right bottom,
+          #f00000,
+          #ff8000,
+          #ffff00,
+          #007940,
+          #4040ff,
+          #a000c0,
+          #f00000,
+          #ff8000,
+          #ffff00,
+          #007940,
+          #4040ff,
+          #a000c0,
+          #f00000
+  );
+  background-size: 400% 400%;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
   font-size: 24px;
   z-index: 9999;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  display: inline-block;
+  animation: gradient-animation 15s linear infinite;
 }
 
 .account {
@@ -127,9 +156,31 @@ nav {
 
 .pixelhostbig {
   font-weight: bold;
-  background:linear-gradient(to left, #7FCCD1, #5B8BD1);
+  background-image: linear-gradient(
+          to right bottom,
+          #f00000,
+          #ff8000,
+          #ffff00,
+          #007940,
+          #4040ff,
+          #a000c0,
+          #f00000,
+          #ff8000,
+          #ffff00,
+          #007940,
+          #4040ff,
+          #a000c0,
+          #f00000
+  );
+  background-size: 400% 400%;
   color: transparent;
   -webkit-background-clip: text;
+  background-clip: text;
+  z-index: 9999;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  display: inline-block;
+  animation: gradient-animation 15s linear infinite;
 }
 
 .ftext {
