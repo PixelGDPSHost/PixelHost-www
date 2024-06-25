@@ -98,19 +98,10 @@ nav {
   font-weight: bold;
   background-image: linear-gradient(
           to right,
-          #f00000,
-          #ff8000,
-          #ffff00,
-          #007940,
-          #4040ff,
-          #a000c0,
-          #f00000,
-          #ff8000,
-          #ffff00,
-          #007940,
-          #4040ff,
-          #a000c0,
-          #f00000
+          #ffffff,
+          #022bac,
+          #ff0000,
+          #ffffff
   );
   background-size: 400% 400%;
   color: transparent;
@@ -158,19 +149,10 @@ nav {
   font-weight: bold;
   background-image: linear-gradient(
           to right,
-          #f00000,
-          #ff8000,
-          #ffff00,
-          #007940,
-          #4040ff,
-          #a000c0,
-          #f00000,
-          #ff8000,
-          #ffff00,
-          #007940,
-          #4040ff,
-          #a000c0,
-          #f00000
+          #ffffff,
+          #022bac,
+          #ff0000,
+          #ffffff
   );
   background-size: 400% 400%;
   color: transparent;
@@ -180,7 +162,7 @@ nav {
   -webkit-text-fill-color: transparent;
   text-fill-color: transparent;
   display: inline-block;
-  animation: gradient-animation 15s linear infinite;
+  animation: gradient-animation 10s linear infinite;
 }
 
 .ftext {
