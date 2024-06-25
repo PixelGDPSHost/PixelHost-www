@@ -7,6 +7,7 @@ import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
 import { useState, useEffect } from 'react';
+import Cookies from 'js-cookie'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ export default function RootLayout({ Component, pageProps }) {
 
     useEffect(() => {
         const fetchAvatar = async () => {
-            const cookie = document.cookie.split('; ').find(row => row.startsWith('PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA='));
+            const cookie = Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA");
             if (cookie) {
                 const formData = new FormData();
                 formData.append('token', cookie.split('=')[1]);

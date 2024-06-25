@@ -269,3 +269,25 @@ bgg {
   height: 3px;
   background: linear-gradient(to right bottom, #396FFA, #20F3CD);
 }
+
+/* Width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #121017 !important;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2e293a;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #443c55;
+}
