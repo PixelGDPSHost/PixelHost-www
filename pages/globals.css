@@ -97,7 +97,7 @@ nav {
 .pixelhost {
   font-weight: bold;
   background-image: linear-gradient(
-          to right bottom,
+          to right,
           #f00000,
           #ff8000,
           #ffff00,
@@ -157,7 +157,7 @@ nav {
 .pixelhostbig {
   font-weight: bold;
   background-image: linear-gradient(
-          to right bottom,
+          to right,
           #f00000,
           #ff8000,
           #ffff00,
