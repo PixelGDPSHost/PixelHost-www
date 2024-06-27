@@ -19,7 +19,7 @@ export const SCard = ({title, lower, iconimg}) => {
 
 export const TDCard = ({ title, price, ozu, disk, db, backup, lower, color }) => {
     const notify = () => {
-        toast.error('Жди до 20.06.2024!', {
+        toast.error('Жди до 30.06.2024!', {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
