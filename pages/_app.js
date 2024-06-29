@@ -55,7 +55,7 @@ export default function RootLayout({ Component, pageProps }) {
         r.push("/panel/login")
     }
     const gotoBobsbin = () => {
-        r.push("https://tenor.com/view/братюльники-pexwer-pexwer9-братцы-брат-gif-12471208367258920906")
+        r.push("https://www.youtube.com/watch?v=1Z317S-PqDc")
     }
 
     return (
@@ -99,9 +99,6 @@ export default function RootLayout({ Component, pageProps }) {
                     <img src="https://cdn.bytenode.cc/image%204.png"/>
                     <img src="https://cdn.bytenode.cc/image%205.png"/>
                     <img src="https://cdn.bytenode.cc/image%206.png"/>
-                    <a href="https://freekassa.ru" target="_blank" rel="noopener noreferrer">
-                        <img src="https://cdn.freekassa.ru/banners/small-dark-2.png" title="Прием платежей" />
-                    </a>
                 </div>
             </footer>
         </NextUIProvider>
