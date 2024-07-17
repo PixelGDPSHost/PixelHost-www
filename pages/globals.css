@@ -152,6 +152,10 @@ nav {
   margin-left: 23.9%;
 }
 
+main {
+  min-height: 100vh;
+}
+
 .card-discord {
   border-radius: 15px;
   width: 300px;
@@ -202,7 +206,20 @@ nav {
   display: flex;
 }
 
+.srvs {
+  margin-left: 156px;
+  padding: 20px;
+}
+
 @media (max-width: 820px) {
+  .srvs {
+    margin-left: calc(156px / 1.8);
+  }
+
+  .opmt {
+    margin-top: 10px;
+  }
+
   .flexoc {
     display: block;
   }
@@ -268,4 +285,17 @@ bgg {
   border: 0;
   height: 3px;
   background: linear-gradient(to right bottom, #396FFA, #20F3CD);
+}
+
+.bgnigga {
+  background: url("https://cdn.builder.io/api/v1/image/assets/TEMP/6bafe556f26b2e952bb2c908c5d8b6c7c833fdb79620cbe701966932e2d6b330?apiKey=c884363479e8457ebcf85cff30a5d30d&");
+  background-size: cover;
+}
+
+.borderr7 {
+  border-radius: 7px;
+}
+
+.borderr8 {
+  border-radius: 8px;
 }
