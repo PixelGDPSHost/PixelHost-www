@@ -35,6 +35,40 @@
 }
 
 html {
+  background: linear-gradient(to bottom,
+  #121017 0%,
+  #121017 50%,
+  #100f14 55%,
+  #0e0d12 60%,
+  #0c0b0f 65%,
+  #0a090c 70%,
+  #080708 75%,
+  #060506 80%,
+  #040304 85%,
+  #020202 90%,
+  #000000 95%,
+  #000000 100%
+  );
+}
+
+.prekolbg {
+  background: linear-gradient(to bottom,
+  #121017 0%,
+  #121017 50%,
+  #100f14 55%,
+  #0e0d12 60%,
+  #0c0b0f 65%,
+  #0a090c 70%,
+  #080708 75%,
+  #060506 80%,
+  #040304 85%,
+  #020202 90%,
+  #000000 95%,
+  #000000 100%
+  );
+}
+
+.prekolbg1 {
   background: #121017 !important;
 }
 
@@ -44,18 +78,34 @@ html {
   --background-end-rgb: 255, 255, 255;
 }
 
+.navflex {
+  margin: 0 auto !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
-    background: #121017;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #121017;
+  background: linear-gradient(to bottom,
+  #121017 0%,
+  #121017 50%,
+  #100f14 55%,
+  #0e0d12 60%,
+  #0c0b0f 65%,
+  #0a090c 70%,
+  #080708 75%,
+  #060506 80%,
+  #040304 85%,
+  #020202 90%,
+  #000000 95%,
+  #000000 100%
+  );
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
@@ -123,6 +173,7 @@ nav {
   background: linear-gradient(180deg, rgba(13, 11, 17, 0), #121017),url("https://cdn.bytenode.cc/Rectangle%2078.png");
   background-size: cover;
   backdrop-filter: blur(5px);
+  margin-top: -3px;
 }
 
 .pixelhostbig {
@@ -211,13 +262,13 @@ main {
   padding: 20px;
 }
 
+.opmt {
+  margin-top: 10px;
+}
+
 @media (max-width: 820px) {
   .srvs {
     margin-left: calc(156px / 1.8);
-  }
-
-  .opmt {
-    margin-top: 10px;
   }
 
   .flexoc {
@@ -298,4 +349,9 @@ bgg {
 
 .borderr8 {
   border-radius: 8px;
+}
+
+.sbarbg {
+  background: rgba(24, 22, 26, 0.75);
+  backdrop-filter: blur(10px);
 }

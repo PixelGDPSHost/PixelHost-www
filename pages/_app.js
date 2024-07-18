@@ -52,14 +52,8 @@ export default function RootLayout({ Component, pageProps }) {
   const gotomain = () => {
     r.push("/");
   };
-  const gototerms = () => {
-    r.push("/terms");
-  };
   const gotologin = () => {
     r.push("/panel/login");
-  };
-  const gotoBobsbin = () => {
-    r.push("https://www.youtube.com/watch?v=1Z317S-PqDc");
   };
 
   return (
@@ -76,16 +70,18 @@ export default function RootLayout({ Component, pageProps }) {
         pauseOnHover
         theme="dark"
       />
-      <nav className="z-40">
-        <div className="flex">
+      <nav className="z-40 navflex">
+        <div className="flex navflex">
           <img
             src="https://cdn.bytenode.cc/pixel.png"
             className="logo"
             onClick={gotomain}
           />
-          <p className="pixelhost">ByteNode</p>
+          <p className="pixelhost cursor-pointer navflex" onClick={gotomain}>
+            ByteNode
+          </p>
         </div>
-        <div className="account" onClick={gotologin}>
+        <div className="account navflex" onClick={gotologin}>
           {avatar ? (
             <img
               className="account-icon istok-web-bold cursor-pointer"
@@ -102,31 +98,6 @@ export default function RootLayout({ Component, pageProps }) {
         </div>
       </nav>
       <Component {...pageProps} />
-      <footer className="bg-black h-[311px] p-[35px]">
-        <center>
-          <img
-            src="https://cdn.bytenode.cc/pixel.png"
-            className="logo mb-[4px]"
-          />
-          <p className="ftext font-semibold">
-            © Copyright Infinitium 2022-2024
-          </p>
-        </center>
-        <hr className="hr" />
-        <h1 className="text-[20px] font-bold mt-[10px]">О нас</h1>
-        <p className="cursor-pointer" onClick={gototerms}>
-          Политика конфидициальности
-        </p>
-        <Link className="cursor-pointer" href="https://status.pixelhost.one/">
-          Мониторинг
-        </Link>
-        <br />
-        <div className="flex mt-[40px]" onClick={gotoBobsbin}>
-          <img src="https://cdn.bytenode.cc/image%204.png" />
-          <img src="https://cdn.bytenode.cc/image%205.png" />
-          <img src="https://cdn.bytenode.cc/image%206.png" />
-        </div>
-      </footer>
     </NextUIProvider>
   );
 }

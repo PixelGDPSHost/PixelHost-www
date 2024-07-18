@@ -1,13 +1,9 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import pezda from "@/public/DashboardLayout.png";
-import pezda1 from "@/public/Server.png";
-import pezda2 from "@/public/MoneyBag.png";
-import pezda3 from "@/public/User.png";
 import pezda4 from "@/public/Add.png";
 import pezda5 from "@/public/Rectangle 186.png";
-import { SRVCard } from "@/components/Components";
+import { SRVCard, SideBar } from "@/components/Components";
 
 export default function MyComponent() {
   const router = useRouter();
@@ -21,28 +17,9 @@ export default function MyComponent() {
   };
 
   return (
-    <main className="bgnigga relative dark">
-      <div className="w-[60px] h-full bg-[#1D1B2A] p-[12.5px] flex flex-col items-center borderr8 absolute left-0 top-0">
-        <div
-          className="w-[35px] h-[35px] bg-[#110F16] mt-[60px] borderr8 flex items-center justify-center cursor-pointer"
-          onClick={gotoMain}
-        >
-          <Image src={pezda} alt="DashboardLayout" />
-        </div>
-        <div
-          className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
-          onClick={gotoSrvs}
-        >
-          <Image src={pezda1} alt="DashboardLayout" />
-        </div>
-        <div className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer">
-          <Image src={pezda2} alt="DashboardLayout" />
-        </div>
-        <div className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer">
-          <Image src={pezda3} alt="DashboardLayout" />
-        </div>
-      </div>
-      <div className="srvs">
+    <main className="relative dark prekolbg1">
+      <SideBar></SideBar>
+      <div className="srvs flex text-center justify-center content-center items-center flex-col">
         <div className="flex items-center mb-[40px] mt-[106.96px]">
           <p className="text-[1.2rem] font-bold">Мои сервера</p>
           <Image

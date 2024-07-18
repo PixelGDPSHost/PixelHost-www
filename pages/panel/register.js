@@ -9,6 +9,7 @@ import { Bounce, toast } from "react-toastify";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Turnstile from "react-turnstile";
+import { Footer } from "@/components/Components";
 
 export default function Home() {
   const [isVisible, setIsVisible] = React.useState(false);
@@ -164,6 +165,7 @@ export default function Home() {
           </p>
         </center>
       </div>
+      <Footer></Footer>
     </main>
   );
 }
