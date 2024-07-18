@@ -37,6 +37,7 @@ export default function Home() {
       formData.append("uname", uname);
       formData.append("name", name);
       formData.append("passwd", password);
+      formData.append("CF_TURNSTILE", turnstile_token);
 
       const resp = await axios.post(
         "https://api.bytenode.cc/v1/reg",
