@@ -1,6 +1,6 @@
 "use client";
 import { Input } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { EyeSlashFilledIcon } from "@/components/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "@/components/EyeFilledIcon";
 import { Button } from "@nextui-org/react";
@@ -73,12 +73,46 @@ export default function Home() {
     }
   };
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await axios.post(
+          "https://api.bytenode.cc/v1/user",
+          {},
+        );
+        const { data } = response;
+        if (
+          data.user &&
+          data.user.id &&
+          data.user.mail &&
+          data.user.uname &&
+          data.user.name &&
+          data.user.avatar
+        ) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/panel");
+    }
+  }, [isAuthenticated, router]);
+
   if (Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA") !== undefined) {
     router.push("/panel");
   }
 
   return (
-    <main className="dark text-foreground">
+    <main className="dark prekolbg text-foreground">
       <div className="h-[100vh]"></div>
       <div className="stupidcenter logindiv">
         <Input

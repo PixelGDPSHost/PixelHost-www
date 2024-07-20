@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { Avatar } from "@/components/Components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,12 +54,9 @@ export default function RootLayout({ Component, pageProps }) {
   const gotomain = () => {
     r.push("/");
   };
-  const gotologin = () => {
-    r.push("/panel/login");
-  };
 
   return (
-    <NextUIProvider>
+    <NextUIProvider className="dark text-foreground bg-background">
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
@@ -81,23 +80,11 @@ export default function RootLayout({ Component, pageProps }) {
             ByteNode
           </p>
         </div>
-        <div className="account navflex" onClick={gotologin}>
-          {avatar ? (
-            <img
-              className="account-icon istok-web-bold cursor-pointer"
-              src={avatar}
-              alt="User Avatar"
-            />
-          ) : (
-            <img
-              className="account-icon istok-web-bold cursor-pointer"
-              src="https://cdn.bytenode.cc/Account.png"
-              alt="Account Icon"
-            />
-          )}
-        </div>
+        <Avatar />
       </nav>
-      <Component {...pageProps} />
+      <NextThemesProvider attribute="class" defaultTheme="dark">
+        <Component {...pageProps} />
+      </NextThemesProvider>
     </NextUIProvider>
   );
 }

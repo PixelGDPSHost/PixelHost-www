@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Button, Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import { Bounce, toast } from "react-toastify";
 import Image from "next/image";
@@ -12,6 +13,8 @@ import pezda from "@/public/DashboardLayout.png";
 import pezda1 from "@/public/Server.png";
 import pezda2 from "@/public/MoneyBag.png";
 import pezda3 from "@/public/User.png";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 export const SCard = ({ title, lower, iconimg }) => {
   const niconimg = "https://cdn.bytenode.cc/" + iconimg;
@@ -215,6 +218,10 @@ export const SideBar = () => {
     router.push("/panel/balance");
   };
 
+  const gotoProfile = () => {
+    router.push("/panel/profile");
+  };
+
   return (
     <div className="w-[60px] h-full sbarbg p-[12.5px] flex flex-col items-center borderr8 absolute left-0 top-0">
       <div
@@ -235,9 +242,142 @@ export const SideBar = () => {
       >
         <Image src={pezda2} alt="DashboardLayout" />
       </div>
-      <div className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer">
+      <div
+        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
+        onClick={gotoProfile}
+      >
         <Image src={pezda3} alt="DashboardLayout" />
       </div>
+    </div>
+  );
+};
+
+export const Avatar = ({ className }) => {
+  const [avatar, setAvatar] = useState(null);
+  const r = useRouter();
+
+  useEffect(() => {
+    const fetchAvatar = async () => {
+      const token = Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA");
+      if (token) {
+        const formData = new FormData();
+        formData.append("cookie", token);
+
+        try {
+          const response = await axios.post(
+            "https://api.bytenode.cc/v1/user",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            },
+          );
+
+          if (response.data) {
+            setAvatar(response.data.user.avatar);
+          }
+        } catch (error) {
+          console.error("Error fetching avatar:", error);
+        }
+      }
+    };
+
+    // Initial fetch
+    fetchAvatar();
+    const intervalId = setInterval(fetchAvatar, 3000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const gotologin = () => {
+    r.push("/panel/login");
+  };
+
+  const gotopanel = () => {
+    r.push("/panel");
+  };
+
+  return (
+    <div className={`navflex ${className}`}>
+      {avatar ? (
+        <img
+          className="h-[30px] w-[30px] istok-web-bold cursor-pointer"
+          src={avatar}
+          alt="User Avatar"
+          onClick={gotopanel}
+        />
+      ) : (
+        <img
+          className="h-[30px] w-[30px] istok-web-bold cursor-pointer account"
+          src="https://cdn.bytenode.cc/Account.png"
+          alt="Account Icon"
+          onClick={gotologin}
+        />
+      )}
+    </div>
+  );
+};
+
+Avatar.propTypes = {
+  className: PropTypes.string,
+};
+
+Avatar.defaultProps = {
+  className: "",
+};
+
+export const AvatarinProfile = () => {
+  const [avatar, setAvatar] = useState(null);
+  const r = useRouter();
+
+  useEffect(() => {
+    const fetchAvatar = async () => {
+      const token = Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA");
+      if (token) {
+        const formData = new FormData();
+        formData.append("cookie", token);
+
+        try {
+          const response = await axios.post(
+            "https://api.bytenode.cc/v1/user",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            },
+          );
+
+          if (response.data) {
+            setAvatar(response.data.user.avatar);
+          }
+        } catch (error) {
+          console.error("Error fetching avatar:", error);
+        }
+      }
+    };
+
+    // Initial fetch
+    fetchAvatar();
+    const intervalId = setInterval(fetchAvatar, 3000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <div className={`nonavflex`}>
+      {avatar ? (
+        <img
+          className="h-[30px] w-[30px] istok-web-bold"
+          src={avatar}
+          alt="User Avatar"
+        />
+      ) : (
+        <img
+          className="h-[30px] w-[30px] istok-web-bold account"
+          src="https://cdn.bytenode.cc/Account.png"
+          alt="Account Icon"
+        />
+      )}
     </div>
   );
 };

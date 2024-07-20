@@ -65,7 +65,7 @@ html {
   #020202 90%,
   #000000 95%,
   #000000 100%
-  );
+  ) !important;
 }
 
 .prekolbg1 {
@@ -79,7 +79,11 @@ html {
 }
 
 .navflex {
-  margin: 0 auto !important;
+  margin: 0 auto;
+}
+
+.nonavflex {
+  margin: 0px 6px 0px 6px !important;
 }
 
 @media (prefers-color-scheme: dark) {

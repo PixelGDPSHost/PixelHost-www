@@ -1,7 +1,25 @@
+"use client";
+
 import * as React from "react";
-import { SideBar } from "@/components/Components";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import Image from "next/image";
+import cd from "@/public/CheckDollar.png";
+import sm from "@/public/SplitMoney.png";
+import { SRVCard, SideBar, AvatarinProfile } from "@/components/Components";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  Input,
+  RadioGroup,
+  Radio,
+} from "@nextui-org/react";
+import { Card, CardHeader } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
@@ -64,13 +82,37 @@ export default function MyComponent() {
 
     checkAuth();
   }, [router]);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const gotoMain = () => {
+    router.push("/panel");
+  };
+
+  const gotoSrvs = () => {
+    router.push("/panel/servers");
+  };
 
   return (
-    <main className="min-h-screen flex prekolbg1">
-      <SideBar />
-      <div className="flex-1 flex justify-center items-center">
-        <div className="w-[341px] h-[231px] bg-black borderr7 flex items-center justify-center text-center p-5">
-          <p>Привет, возможно вместо этого текста тут что-то будет</p>
+    <main className="relative dark prekolbg1">
+      <SideBar></SideBar>
+      <div className="flex flex-col justify-center content-center items-center">
+        <div className="bg-black min-w-[330px] max-w-[330px] mt-[106.96px] p-[10px] rounded-t-large rounded-b-large text-center">
+          <h1 className="text-[1.3rem] font-bold">Настройки</h1>
+          <p className="mt-3 flex items-center content-center justify-center">
+            Аккаунт: <AvatarinProfile className="nonavflex" />
+            kidumka
+          </p>
+          <div className="flex flex-col">
+            <Button color="primary" className="mt-3">
+              Изменить Пароль
+            </Button>
+            <Button color="primary" className="mt-3">
+              Включить 2FA
+            </Button>
+            <Button color="primary" className="mt-3">
+              Изменить Фото профиля
+            </Button>
+          </div>
         </div>
       </div>
     </main>
