@@ -108,7 +108,13 @@ export default function MyComponent() {
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.accept = "image/*";
-    fileInput.onchange = handleFileChange;
+
+    // Use an anonymous function or a bind approach to set the correct `this` context and event type
+    fileInput.addEventListener("change", (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      handleFileChange({ target } as React.ChangeEvent<HTMLInputElement>);
+    });
+
     fileInput.click();
   };
 
