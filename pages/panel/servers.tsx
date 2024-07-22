@@ -1,31 +1,32 @@
-"use client";
-
 import * as React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import cd from "@/public/CheckDollar.png";
-import sm from "@/public/SplitMoney.png";
-import { SRVCard, SideBar, AvatarinProfile } from "@/components/Components";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  useDisclosure,
-  Input,
-  RadioGroup,
-  Radio,
-} from "@nextui-org/react";
-import { Card, CardHeader } from "@nextui-org/react";
+import pezda4 from "@/public/Add.png";
+import pezda5 from "@/public/Rectangle 186.png";
+import { SRVCard, SideBar } from "@/components/Components";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
+interface Server {
+  id: string;
+  name: string;
+  payed: boolean;
+  status: string;
+}
+
+interface ServersData {
+  gdps_servers: Server[];
+  discord_bots: Server[];
+}
+
 export default function MyComponent() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [servers, setServers] = useState<ServersData>({
+    gdps_servers: [],
+    discord_bots: [],
+  });
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -58,6 +59,18 @@ export default function MyComponent() {
             if (router.pathname === "/panel/login") {
               router.push("/panel");
             }
+
+            // Fetching server data
+            const serverResponse = await axios.post(
+              "https://api.bytenode.cc/v1/user/buyed",
+              formData,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              },
+            );
+            setServers(serverResponse.data);
           } else {
             if (
               router.pathname.startsWith("/panel") &&
@@ -82,7 +95,6 @@ export default function MyComponent() {
 
     checkAuth();
   }, [router]);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const gotoMain = () => {
     router.push("/panel");
@@ -94,25 +106,37 @@ export default function MyComponent() {
 
   return (
     <main className="relative dark prekolbg1">
-      <SideBar></SideBar>
-      <div className="flex flex-col justify-center content-center items-center">
-        <div className="bg-black min-w-[330px] max-w-[330px] mt-[106.96px] p-[10px] rounded-t-large rounded-b-large text-center">
-          <h1 className="text-[1.3rem] font-bold">Настройки</h1>
-          <p className="mt-3 flex items-center content-center justify-center">
-            Аккаунт: <AvatarinProfile className="nonavflex" />
-            kidumka
-          </p>
-          <div className="flex flex-col">
-            <Button color="primary" className="mt-3">
-              Изменить Пароль
-            </Button>
-            <Button color="primary" className="mt-3">
-              Включить 2FA
-            </Button>
-            <Button color="primary" className="mt-3">
-              Изменить Фото профиля
-            </Button>
-          </div>
+      <SideBar />
+      <div className="srvs flex text-center justify-center content-center items-center flex-col">
+        <div className="flex items-center mb-[40px] mt-[106.96px]">
+          <p className="text-[1.2rem] font-bold">Мои сервера</p>
+          <Image
+            src={pezda4}
+            alt="add"
+            width={30}
+            height={30}
+            className="w-[30px] h-[30px] ml-[10px] cursor-pointer"
+          />
+        </div>
+        <div className="flexo gap-4">
+          {servers.gdps_servers.map((server) => (
+            <SRVCard
+              key={server.id}
+              title={server.name}
+              oplachen={server.payed.toString()} // Convert boolean to string
+              status={server.status}
+              type="gdps"
+            />
+          ))}
+          {servers.discord_bots.map((bot) => (
+            <SRVCard
+              key={bot.id}
+              title={bot.name}
+              oplachen={bot.payed.toString()} // Convert boolean to string
+              status={bot.status}
+              type="discord"
+            />
+          ))}
         </div>
       </div>
     </main>

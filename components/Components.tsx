@@ -27,7 +27,14 @@ import pezda3 from "@/public/User.png";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-export const SCard = ({ title, lower, iconimg }) => {
+// Props type for SCard component
+interface SCardP {
+  title: string;
+  lower: string;
+  iconimg: string;
+}
+
+export const SCard: React.FC<SCardP> = ({ title, lower, iconimg }) => {
   const niconimg = "https://cdn.bytenode.cc/" + iconimg;
   return (
     <div className="flex items-center ml-10 mb-[43.72px] font-medium">
@@ -42,14 +49,24 @@ export const SCard = ({ title, lower, iconimg }) => {
   );
 };
 
-export const TDCard = ({
+// Props type for TDCard component
+interface TDCardP {
+  title: string;
+  price: string;
+  ozu: string;
+  disk: string;
+  db: string;
+  backup: string;
+  color: string;
+}
+
+export const TDCard: React.FC<TDCardP> = ({
   title,
   price,
   ozu,
   disk,
   db,
   backup,
-  lower,
   color,
 }) => {
   const notify = () => {
@@ -109,7 +126,6 @@ export const TDCard = ({
           ></img>
           Бэкапы: {backup}
         </p>
-        <p>{lower}</p>
         <Button color="primary" onClick={notify}>
           Выбрать
         </Button>
@@ -118,23 +134,37 @@ export const TDCard = ({
   );
 };
 
-export const SRVCard = ({ title, type, oplachen, status }) => {
-  let buttonColor;
-  let tstatus;
-  let disab;
-  let imageSrc;
+// Props type for SRVCard component
+interface SRVCardP {
+  title: string;
+  type: string;
+  oplachen: string;
+  status: string;
+}
+
+export const SRVCard: React.FC<SRVCardP> = ({
+  title,
+  type,
+  oplachen,
+  status,
+}) => {
+  let buttonColor: "default" | "primary";
+  let tstatus: string;
+  let disab: boolean;
+  let imageSrc: string;
+
   switch (type) {
     case "discord":
-      imageSrc = pezda7;
+      imageSrc = pezda7.src;
       break;
     case "gdps":
-      imageSrc = pezda6;
+      imageSrc = pezda6.src;
       break;
     case "mc":
-      imageSrc = pezda5;
+      imageSrc = pezda5.src;
       break;
     default:
-      imageSrc = pezda8;
+      imageSrc = pezda8.src;
   }
 
   switch (status) {
@@ -157,7 +187,13 @@ export const SRVCard = ({ title, type, oplachen, status }) => {
   return (
     <Card className="max-w-[280px] min-w-[280px] max-h-[133px] min-h-[133px] opmt">
       <CardHeader className="flex items-center text-center content-center justify-center gap-3">
-        <Image alt="server" height={40} radius="sm" src={imageSrc} width={40} />
+        <Image
+          alt="server"
+          height={40}
+          className="radius-sm"
+          src={imageSrc}
+          width={40}
+        />
         <center>
           <div className="flex flex-col">
             <p className="text-md">{title}</p>
@@ -177,95 +213,14 @@ export const SRVCard = ({ title, type, oplachen, status }) => {
   );
 };
 
-export const Footer = () => {
-  const r = useRouter();
+// Props type for Avatar component
+interface AvatarP {
+  className?: string;
+}
 
-  const gototerms = () => {
-    r.push("/terms");
-  };
-
-  const gotoBobsbin = () => {
-    r.push("https://www.youtube.com/watch?v=1Z317S-PqDc");
-  };
-  return (
-    <footer className="bg-black h-[311px] p-[35px]">
-      <center>
-        <img
-          src="https://cdn.bytenode.cc/pixel.png"
-          className="logo mb-[4px]"
-        />
-        <p className="ftext font-semibold">© Copyright Infinitium 2022-2024</p>
-      </center>
-      <hr className="hr" />
-      <h1 className="text-[20px] font-bold mt-[10px]">О нас</h1>
-      <p className="cursor-pointer" onClick={gototerms}>
-        Политика конфидициальности
-      </p>
-      <Link className="cursor-pointer" href="https://status.pixelhost.one/">
-        Мониторинг
-      </Link>
-      <br />
-      <div className="flex mt-[40px]" onClick={gotoBobsbin}>
-        <img src="https://cdn.bytenode.cc/image%204.png" />
-        <img src="https://cdn.bytenode.cc/image%205.png" />
-        <img src="https://cdn.bytenode.cc/image%206.png" />
-      </div>
-    </footer>
-  );
-};
-
-export const SideBar = () => {
-  const router = useRouter();
-
-  const gotoMain = () => {
-    router.push("/panel");
-  };
-
-  const gotoSrvs = () => {
-    router.push("/panel/servers");
-  };
-
-  const gotoBalance = () => {
-    router.push("/panel/balance");
-  };
-
-  const gotoProfile = () => {
-    router.push("/panel/profile");
-  };
-
-  return (
-    <div className="w-[60px] h-full sbarbg p-[12.5px] flex flex-col items-center borderr8 absolute left-0 top-0">
-      <div
-        className="w-[35px] h-[35px] bg-[#110F16] mt-[60px] borderr8 flex items-center justify-center cursor-pointer"
-        onClick={gotoMain}
-      >
-        <Image src={pezda} alt="DashboardLayout" />
-      </div>
-      <div
-        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
-        onClick={gotoSrvs}
-      >
-        <Image src={pezda1} alt="DashboardLayout" />
-      </div>
-      <div
-        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
-        onClick={gotoBalance}
-      >
-        <Image src={pezda2} alt="DashboardLayout" />
-      </div>
-      <div
-        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
-        onClick={gotoProfile}
-      >
-        <Image src={pezda3} alt="DashboardLayout" />
-      </div>
-    </div>
-  );
-};
-
-export const Avatar = ({ className }) => {
-  const [avatar, setAvatar] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+export const Avatar: React.FC<AvatarP> = ({ className }) => {
+  const [avatar, setAvatar] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -337,11 +292,11 @@ export const Avatar = ({ className }) => {
 
   return (
     <div className={`navflex ${className}`}>
-      <Dropdown placement="bottom-right">
+      <Dropdown placement="bottom-start">
         <DropdownTrigger>
           <img
             className="h-[30px] w-[30px] istok-web-bold cursor-pointer rounded-full"
-            src={avatar}
+            src={avatar || "https://cdn.bytenode.cc/Account.png"}
             alt="User Avatar"
           />
         </DropdownTrigger>
@@ -366,8 +321,9 @@ Avatar.defaultProps = {
   className: "",
 };
 
-export const AvatarinProfile = () => {
-  const [avatar, setAvatar] = useState(null);
+// Avatar in Profile
+export const AvatarinProfile: React.FC = () => {
+  const [avatar, setAvatar] = useState<string | null>(null);
   const r = useRouter();
 
   useEffect(() => {
@@ -419,5 +375,91 @@ export const AvatarinProfile = () => {
         />
       )}
     </div>
+  );
+};
+
+export const SideBar = () => {
+  const router = useRouter();
+
+  const gotoMain = () => {
+    router.push("/panel");
+  };
+
+  const gotoSrvs = () => {
+    router.push("/panel/servers");
+  };
+
+  const gotoBalance = () => {
+    router.push("/panel/balance");
+  };
+
+  const gotoProfile = () => {
+    router.push("/panel/profile");
+  };
+
+  return (
+    <div className="w-[60px] h-full sbarbg p-[12.5px] flex flex-col items-center borderr8 absolute left-0 top-0">
+      <div
+        className="w-[35px] h-[35px] bg-[#110F16] mt-[60px] borderr8 flex items-center justify-center cursor-pointer"
+        onClick={gotoMain}
+      >
+        <Image src={pezda} alt="DashboardLayout" />
+      </div>
+      <div
+        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
+        onClick={gotoSrvs}
+      >
+        <Image src={pezda1} alt="DashboardLayout" />
+      </div>
+      <div
+        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
+        onClick={gotoBalance}
+      >
+        <Image src={pezda2} alt="DashboardLayout" />
+      </div>
+      <div
+        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
+        onClick={gotoProfile}
+      >
+        <Image src={pezda3} alt="DashboardLayout" />
+      </div>
+    </div>
+  );
+};
+
+export const Footer = () => {
+  const r = useRouter();
+
+  const gototerms = () => {
+    r.push("/terms");
+  };
+
+  const gotoBobsbin = () => {
+    r.push("https://www.youtube.com/watch?v=1Z317S-PqDc");
+  };
+  return (
+    <footer className="bg-black h-[311px] p-[35px]">
+      <center>
+        <img
+          src="https://cdn.bytenode.cc/pixel.png"
+          className="logo mb-[4px]"
+        />
+        <p className="ftext font-semibold">© Copyright Infinitium 2022-2024</p>
+      </center>
+      <hr className="hr" />
+      <h1 className="text-[20px] font-bold mt-[10px]">О нас</h1>
+      <p className="cursor-pointer" onClick={gototerms}>
+        Политика конфидициальности
+      </p>
+      <Link className="cursor-pointer" href="https://status.pixelhost.one/">
+        Мониторинг
+      </Link>
+      <br />
+      <div className="flex mt-[40px]" onClick={gotoBobsbin}>
+        <img src="https://cdn.bytenode.cc/image%204.png" />
+        <img src="https://cdn.bytenode.cc/image%205.png" />
+        <img src="https://cdn.bytenode.cc/image%206.png" />
+      </div>
+    </footer>
   );
 };

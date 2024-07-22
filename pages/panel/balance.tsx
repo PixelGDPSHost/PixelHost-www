@@ -119,7 +119,6 @@ export default function MyComponent() {
               <ModalBody>
                 <RadioGroup
                   label="Способ Оплаты"
-                  labelPlacement="outside"
                   orientation="horizontal"
                   isRequired
                 >

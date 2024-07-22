@@ -9,14 +9,24 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { Footer } from "@/components/Components";
 
-export default function Home() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+// Define the type for the Home component's state
+interface HomeState {
+  isVisible: boolean;
+  email: string;
+  password: string;
+  isAuthenticated: boolean;
+}
+
+// Define the functional component
+const Home: React.FC = () => {
+  const [isVisible, setIsVisible] = useState<HomeState["isVisible"]>(false);
+  const [email, setEmail] = useState<HomeState["email"]>("");
+  const [password, setPassword] = useState<HomeState["password"]>("");
+  const [isAuthenticated, setIsAuthenticated] =
+    useState<HomeState["isAuthenticated"]>(false);
   const router = useRouter();
 
-  const toggleVisibility = () => setIsVisible(!isVisible);
+  const toggleVisibility = () => setIsVisible((prev) => !prev);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -106,7 +116,7 @@ export default function Home() {
         router.push("/panel");
       }
     } catch (error) {
-      if (error.response && error.response.status === 400) {
+      if (axios.isAxiosError(error) && error.response?.status === 400) {
         toast.error("Неправильный юзернейм или пароль");
       } else {
         toast.error("Что-то пошло не так. Попробуйте еще раз позже");
@@ -133,7 +143,7 @@ export default function Home() {
           onClear={() => console.log("input cleared")}
           className="w-full mb-[11px]"
           onChange={(e) => setEmail(e.target.value)}
-          autocomplete="off"
+          autoComplete="off"
         />
         <Input
           label="Пароль"
@@ -152,7 +162,7 @@ export default function Home() {
               )}
             </button>
           }
-          autocomplete="off"
+          autoComplete="off"
           type={isVisible ? "text" : "password"}
           className="w-full mb-[11px]"
           onChange={(e) => setPassword(e.target.value)}
@@ -178,4 +188,6 @@ export default function Home() {
       <Footer />
     </main>
   );
-}
+};
+
+export default Home;

@@ -12,11 +12,18 @@ import axios from "axios";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { Avatar } from "@/components/Components";
 
+// Define the Inter font
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ Component, pageProps }) {
+// Define the type for the RootLayout props
+interface RootLayoutProps {
+  Component: React.ElementType;
+  pageProps: any;
+}
+
+export default function RootLayout({ Component, pageProps }: RootLayoutProps) {
   const r = useRouter();
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchAvatar = async () => {
@@ -56,7 +63,7 @@ export default function RootLayout({ Component, pageProps }) {
   };
 
   return (
-    <NextUIProvider className="dark text-foreground bg-background">
+    <NextUIProvider>
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
@@ -75,6 +82,7 @@ export default function RootLayout({ Component, pageProps }) {
             src="https://cdn.bytenode.cc/pixel.png"
             className="logo"
             onClick={gotomain}
+            alt="Logo"
           />
           <p className="pixelhost cursor-pointer navflex" onClick={gotomain}>
             ByteNode
