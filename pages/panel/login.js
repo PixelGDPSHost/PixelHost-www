@@ -1,9 +1,8 @@
 "use client";
-import { Input } from "@nextui-org/react";
+import { Input, Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { EyeSlashFilledIcon } from "@/components/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "@/components/EyeFilledIcon";
-import { Button } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { Bounce, toast } from "react-toastify";
 import axios from "axios";
@@ -11,18 +10,65 @@ import Cookies from "js-cookie";
 import { Footer } from "@/components/Components";
 
 export default function Home() {
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA");
+      if (token) {
+        const formData = new FormData();
+        formData.append("cookie", token);
 
-  const router = useRouter();
+        try {
+          const response = await axios.post(
+            "https://api.bytenode.cc/v1/user",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            },
+          );
+
+          const { data } = response;
+          if (
+            data.user &&
+            data.user.id &&
+            data.user.mail &&
+            data.user.uname &&
+            data.user.name &&
+            data.user.avatar
+          ) {
+            setIsAuthenticated(true);
+          }
+        } catch (error) {
+          console.error("Error checking authentication:", error);
+        }
+      }
+    };
+
+    // Only run on the client side
+    if (typeof window !== "undefined") {
+      checkAuth();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/panel");
+    }
+  }, [isAuthenticated, router]);
 
   const gotoReset = () => {
     router.push("/panel/resetpass");
   };
+
   const gotoReg = () => {
     router.push("/panel/register");
   };
@@ -67,43 +113,11 @@ export default function Home() {
       }
     }
   };
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await axios.post(
-          "https://api.bytenode.cc/v1/user",
-          {},
-        );
-        const { data } = response;
-        if (
-          data.user &&
-          data.user.id &&
-          data.user.mail &&
-          data.user.uname &&
-          data.user.name &&
-          data.user.avatar
-        ) {
-          setIsAuthenticated(true);
-        }
-      } catch (error) {
-        console.error("Error checking authentication:", error);
-      }
-    };
-
-    checkAuth();
-  }, []);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/panel");
-    }
-  }, [isAuthenticated, router]);
-
-  // if (Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA") !== undefined) {
-  //   router.push("/panel");
-  // }
+  // Render nothing or a loader while checking authentication
+  if (typeof window !== "undefined" && isAuthenticated) {
+    return null;
+  }
 
   return (
     <main className="dark prekolbg text-foreground">
@@ -111,7 +125,7 @@ export default function Home() {
       <div className="stupidcenter logindiv">
         <Input
           isClearable
-          type="name"
+          type="username"
           label="Юзернейм"
           variant="bordered"
           placeholder="TumGov"
@@ -119,6 +133,7 @@ export default function Home() {
           onClear={() => console.log("input cleared")}
           className="w-full mb-[11px]"
           onChange={(e) => setEmail(e.target.value)}
+          autocomplete="off"
         />
         <Input
           label="Пароль"
@@ -137,6 +152,7 @@ export default function Home() {
               )}
             </button>
           }
+          autocomplete="off"
           type={isVisible ? "text" : "password"}
           className="w-full mb-[11px]"
           onChange={(e) => setPassword(e.target.value)}
@@ -159,7 +175,7 @@ export default function Home() {
           </p>
         </center>
       </div>
-      <Footer></Footer>
+      <Footer />
     </main>
   );
 }

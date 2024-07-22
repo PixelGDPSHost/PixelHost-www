@@ -1,10 +1,21 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Button, Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Divider,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@nextui-org/react";
 import { Bounce, toast } from "react-toastify";
 import Image from "next/image";
 import pezda5 from "@/public/Rectangle 186.png";
-import pezda6 from "@/public/Rectangle 188.png";
+import pezda6 from "@/public/GeometryDash.png";
 import pezda7 from "@/public/Rectangle 190.png";
 import pezda8 from "@/public/Server.png";
 import Link from "next/link";
@@ -254,7 +265,8 @@ export const SideBar = () => {
 
 export const Avatar = ({ className }) => {
   const [avatar, setAvatar] = useState(null);
-  const r = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchAvatar = async () => {
@@ -276,10 +288,14 @@ export const Avatar = ({ className }) => {
 
           if (response.data) {
             setAvatar(response.data.user.avatar);
+            setIsAuthenticated(true);
           }
         } catch (error) {
           console.error("Error fetching avatar:", error);
+          setIsAuthenticated(false);
         }
+      } else {
+        setIsAuthenticated(false);
       }
     };
 
@@ -290,30 +306,54 @@ export const Avatar = ({ className }) => {
   }, []);
 
   const gotologin = () => {
-    r.push("/panel/login");
+    router.push("/panel/login");
+  };
+
+  const logout = () => {
+    Cookies.remove("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA");
+    gotologin();
   };
 
   const gotopanel = () => {
-    r.push("/panel");
+    router.push("/panel");
   };
 
-  return (
-    <div className={`navflex ${className}`}>
-      {avatar ? (
-        <img
-          className="h-[30px] w-[30px] istok-web-bold cursor-pointer"
-          src={avatar}
-          alt="User Avatar"
-          onClick={gotopanel}
-        />
-      ) : (
+  const gotoprofile = () => {
+    router.push("/panel/profile");
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className={`navflex rounded-full ${className}`}>
         <img
           className="h-[30px] w-[30px] istok-web-bold cursor-pointer account"
           src="https://cdn.bytenode.cc/Account.png"
           alt="Account Icon"
           onClick={gotologin}
         />
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`navflex ${className}`}>
+      <Dropdown placement="bottom-right">
+        <DropdownTrigger>
+          <img
+            className="h-[30px] w-[30px] istok-web-bold cursor-pointer rounded-full"
+            src={avatar}
+            alt="User Avatar"
+          />
+        </DropdownTrigger>
+        <DropdownMenu aria-label="User menu">
+          <DropdownItem key="profile" onClick={gotoprofile}>
+            Профиль
+          </DropdownItem>
+          <DropdownItem key="logout" onClick={logout} className="text-red-600">
+            Выйти
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
     </div>
   );
 };
@@ -367,13 +407,13 @@ export const AvatarinProfile = () => {
     <div className={`nonavflex`}>
       {avatar ? (
         <img
-          className="h-[30px] w-[30px] istok-web-bold"
+          className="h-[30px] w-[30px] rounded-full istok-web-bold"
           src={avatar}
           alt="User Avatar"
         />
       ) : (
         <img
-          className="h-[30px] w-[30px] istok-web-bold account"
+          className="h-[30px] w-[30px] rounded-full istok-web-bold account"
           src="https://cdn.bytenode.cc/Account.png"
           alt="Account Icon"
         />

@@ -11,6 +11,10 @@ import axios from "axios";
 export default function MyComponent() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [servers, setServers] = useState({
+    gdps_servers: [],
+    discord_bots: [],
+  });
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -43,6 +47,18 @@ export default function MyComponent() {
             if (router.pathname === "/panel/login") {
               router.push("/panel");
             }
+
+            // Fetching server data
+            const serverResponse = await axios.post(
+              "https://api.bytenode.cc/v1/user/buyed",
+              formData,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              },
+            );
+            setServers(serverResponse.data);
           } else {
             if (
               router.pathname.startsWith("/panel") &&
@@ -91,29 +107,24 @@ export default function MyComponent() {
           />
         </div>
         <div className="flexo gap-4">
-          <SRVCard
-            title="фуфля"
-            oplachen="14.11.2024"
-            status="Посхалко джокер 1488"
-          ></SRVCard>
-          <SRVCard
-            title="PixelMine"
-            oplachen="10.11.2024"
-            status="Устанавливается"
-            type="mc"
-          ></SRVCard>
-          <SRVCard
-            title="PixelDash"
-            oplachen="20.08.2024"
-            status="Установлен"
-            type="gdps"
-          ></SRVCard>
-          <SRVCard
-            title="ByteNode BOT"
-            oplachen="25.07.2024"
-            status="Установлен"
-            type="discord"
-          ></SRVCard>
+          {servers.gdps_servers.map((server) => (
+            <SRVCard
+              key={server.id}
+              title={server.name}
+              oplachen={server.payed}
+              status={server.status}
+              type="gdps"
+            ></SRVCard>
+          ))}
+          {servers.discord_bots.map((bot) => (
+            <SRVCard
+              key={bot.id}
+              title={bot.name}
+              oplachen={bot.payed}
+              status={bot.status}
+              type="discord"
+            ></SRVCard>
+          ))}
         </div>
       </div>
     </main>

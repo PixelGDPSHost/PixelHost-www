@@ -24,6 +24,7 @@ import axios from "axios";
 export default function MyComponent() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -33,7 +34,7 @@ export default function MyComponent() {
           const formData = new FormData();
           formData.append("cookie", authCookie);
 
-          const response = await axios.post(
+          const userResponse = await axios.post(
             "https://api.bytenode.cc/v1/user",
             formData,
             {
@@ -43,7 +44,7 @@ export default function MyComponent() {
             },
           );
 
-          const { data } = response;
+          const { data } = userResponse;
           if (
             data.user &&
             data.user.id &&
@@ -55,6 +56,21 @@ export default function MyComponent() {
             setIsAuthenticated(true);
             if (router.pathname === "/panel/login") {
               router.push("/panel");
+            }
+
+            // Получаем баланс
+            const balanceResponse = await axios.post(
+              "https://api.bytenode.cc/v1/user/balance",
+              formData,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              },
+            );
+
+            if (balanceResponse.data && balanceResponse.data.balance) {
+              setBalance(balanceResponse.data.balance);
             }
           } else {
             if (
@@ -80,6 +96,7 @@ export default function MyComponent() {
 
     checkAuth();
   }, [router]);
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const gotoMain = () => {
@@ -134,7 +151,7 @@ export default function MyComponent() {
       <SideBar></SideBar>
       <div className="flex flex-col justify-center content-center items-center">
         <div className="flex justify-center text-center content-center items-center self-center mt-[106.96px]">
-          <p className="mr-3">1999₽</p>
+          <p className="mr-3">{balance}₽</p>
           <Button color="primary" onPress={onOpen}>
             Пополнить
           </Button>
@@ -142,51 +159,53 @@ export default function MyComponent() {
         <div className="bg-black min-w-[330px] max-w-[330px] mt-5 p-[10px] rounded-t-large rounded-b-large">
           <h1 className="text-[1.3rem] font-bold text-center">История</h1>
 
-          <Card className="max-w-[400px] mt-5">
-            <CardHeader className="flex gap-3">
-              <Image
-                alt="nextui logo"
-                height={40}
-                radius="sm"
-                src={cd}
-                width={40}
-              />
-              <div className="flex flex-col">
-                <p className="text-md">Пополнение | 1999₽</p>
-                <p className="text-small text-default-500">20.08.2024 12:52</p>
-              </div>
-            </CardHeader>
-          </Card>
-          <Card className="max-w-[400px] mt-5">
-            <CardHeader className="flex gap-3">
-              <Image
-                alt="nextui logo"
-                height={40}
-                radius="sm"
-                src={sm}
-                width={40}
-              />
-              <div className="flex flex-col">
-                <p className="text-md">PixelDash - Ascend | -79₽</p>
-                <p className="text-small text-default-500">20.08.2024 12:52</p>
-              </div>
-            </CardHeader>
-          </Card>
-          <Card className="max-w-[400px] mt-5">
-            <CardHeader className="flex gap-3">
-              <Image
-                alt="nextui logo"
-                height={40}
-                radius="sm"
-                src={sm}
-                width={40}
-              />
-              <div className="flex flex-col">
-                <p className="text-md">ByteNode BOT - Byte | -49₽</p>
-                <p className="text-small text-default-500">25.07.2024 12:52</p>
-              </div>
-            </CardHeader>
-          </Card>
+          <p>API истории будет 23.07.2024</p>
+
+          {/*<Card className="max-w-[400px] mt-5">*/}
+          {/*  <CardHeader className="flex gap-3">*/}
+          {/*    <Image*/}
+          {/*      alt="nextui logo"*/}
+          {/*      height={40}*/}
+          {/*      radius="sm"*/}
+          {/*      src={cd}*/}
+          {/*      width={40}*/}
+          {/*    />*/}
+          {/*    <div className="flex flex-col">*/}
+          {/*      <p className="text-md">Пополнение | 1999₽</p>*/}
+          {/*      <p className="text-small text-default-500">20.08.2024 12:52</p>*/}
+          {/*    </div>*/}
+          {/*  </CardHeader>*/}
+          {/*</Card>*/}
+          {/*<Card className="max-w-[400px] mt-5">*/}
+          {/*  <CardHeader className="flex gap-3">*/}
+          {/*    <Image*/}
+          {/*      alt="nextui logo"*/}
+          {/*      height={40}*/}
+          {/*      radius="sm"*/}
+          {/*      src={sm}*/}
+          {/*      width={40}*/}
+          {/*    />*/}
+          {/*    <div className="flex flex-col">*/}
+          {/*      <p className="text-md">PixelDash - Ascend | -79₽</p>*/}
+          {/*      <p className="text-small text-default-500">20.08.2024 12:52</p>*/}
+          {/*    </div>*/}
+          {/*  </CardHeader>*/}
+          {/*</Card>*/}
+          {/*<Card className="max-w-[400px] mt-5">*/}
+          {/*  <CardHeader className="flex gap-3">*/}
+          {/*    <Image*/}
+          {/*      alt="nextui logo"*/}
+          {/*      height={40}*/}
+          {/*      radius="sm"*/}
+          {/*      src={sm}*/}
+          {/*      width={40}*/}
+          {/*    />*/}
+          {/*    <div className="flex flex-col">*/}
+          {/*      <p className="text-md">ByteNode BOT - Byte | -49₽</p>*/}
+          {/*      <p className="text-small text-default-500">25.07.2024 12:52</p>*/}
+          {/*    </div>*/}
+          {/*  </CardHeader>*/}
+          {/*</Card>*/}
         </div>
       </div>
     </main>
