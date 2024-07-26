@@ -66,7 +66,7 @@ export default function MyComponent() {
   }, [router]);
 
   return (
-    <main className="min-h-screen flex prekolbg1">
+    <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav flex">
       <SideBar />
       <div className="flex-1 flex justify-center items-center">
         <div className="w-[341px] h-[231px] bg-black borderr7 flex items-center justify-center text-center p-5">

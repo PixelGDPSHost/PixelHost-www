@@ -292,7 +292,7 @@ export const Avatar: React.FC<AvatarP> = ({ className }) => {
 
   return (
     <div className={`navflex ${className}`}>
-      <Dropdown placement="bottom-start">
+      <Dropdown placement="bottom-end">
         <DropdownTrigger>
           <img
             className="h-[30px] w-[30px] istok-web-bold cursor-pointer rounded-full"
@@ -398,9 +398,9 @@ export const SideBar = () => {
   };
 
   return (
-    <div className="w-[60px] h-full sbarbg p-[12.5px] flex flex-col items-center borderr8 absolute left-0 top-0">
+    <div className="w-[60px] min-h-screen-nav max-h-screen-nav sbarbg p-[12.5px] flex flex-col items-center borderr8 absolute left-0 top-0 sbar">
       <div
-        className="w-[35px] h-[35px] bg-[#110F16] mt-[60px] borderr8 flex items-center justify-center cursor-pointer"
+        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
         onClick={gotoMain}
       >
         <Image src={pezda} alt="DashboardLayout" />

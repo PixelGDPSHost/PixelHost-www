@@ -21,10 +21,20 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
+// Определите тип данных для транзакций
+interface Transaction {
+  operation: string;
+  sum: number;
+  product?: string;
+  created_at: string;
+}
+
 export default function MyComponent() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [balance, setBalance] = useState(0);
+  const [history, setHistory] = useState<Transaction[]>([]);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -72,6 +82,21 @@ export default function MyComponent() {
             if (balanceResponse.data && balanceResponse.data.balance) {
               setBalance(balanceResponse.data.balance);
             }
+
+            // Получаем историю баланса
+            const historyResponse = await axios.post(
+              "https://api.bytenode.cc/v1/user/balance/history",
+              formData,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              },
+            );
+
+            if (historyResponse.data && historyResponse.data.history) {
+              setHistory(historyResponse.data.history);
+            }
           } else {
             if (
               router.pathname.startsWith("/panel") &&
@@ -97,8 +122,6 @@ export default function MyComponent() {
     checkAuth();
   }, [router]);
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
   const gotoMain = () => {
     router.push("/panel");
   };
@@ -108,8 +131,8 @@ export default function MyComponent() {
   };
 
   return (
-    <main className="relative dark prekolbg1">
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement={"center"}>
+    <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -149,63 +172,41 @@ export default function MyComponent() {
       </Modal>
       <SideBar></SideBar>
       <div className="flex flex-col justify-center content-center items-center">
-        <div className="flex justify-center text-center content-center items-center self-center mt-[106.96px]">
+        <div className="flex justify-center text-center content-center items-center self-center mt-[56.96px]">
           <p className="mr-3">{balance}₽</p>
           <Button color="primary" onPress={onOpen}>
             Пополнить
           </Button>
         </div>
-        <div className="bg-black min-w-[330px] max-w-[330px] mt-5 p-[10px] rounded-t-large rounded-b-large">
-          <h1 className="text-[1.3rem] font-bold text-center">История</h1>
+        <h1 className="text-[1.3rem] font-bold text-center mt-5">История</h1>
 
-          <p>API истории будет 23.07.2024</p>
-
-          {/*<Card className="max-w-[400px] mt-5">*/}
-          {/*  <CardHeader className="flex gap-3">*/}
-          {/*    <Image*/}
-          {/*      alt="nextui logo"*/}
-          {/*      height={40}*/}
-          {/*      radius="sm"*/}
-          {/*      src={cd}*/}
-          {/*      width={40}*/}
-          {/*    />*/}
-          {/*    <div className="flex flex-col">*/}
-          {/*      <p className="text-md">Пополнение | 1999₽</p>*/}
-          {/*      <p className="text-small text-default-500">20.08.2024 12:52</p>*/}
-          {/*    </div>*/}
-          {/*  </CardHeader>*/}
-          {/*</Card>*/}
-          {/*<Card className="max-w-[400px] mt-5">*/}
-          {/*  <CardHeader className="flex gap-3">*/}
-          {/*    <Image*/}
-          {/*      alt="nextui logo"*/}
-          {/*      height={40}*/}
-          {/*      radius="sm"*/}
-          {/*      src={sm}*/}
-          {/*      width={40}*/}
-          {/*    />*/}
-          {/*    <div className="flex flex-col">*/}
-          {/*      <p className="text-md">PixelDash - Ascend | -79₽</p>*/}
-          {/*      <p className="text-small text-default-500">20.08.2024 12:52</p>*/}
-          {/*    </div>*/}
-          {/*  </CardHeader>*/}
-          {/*</Card>*/}
-          {/*<Card className="max-w-[400px] mt-5">*/}
-          {/*  <CardHeader className="flex gap-3">*/}
-          {/*    <Image*/}
-          {/*      alt="nextui logo"*/}
-          {/*      height={40}*/}
-          {/*      radius="sm"*/}
-          {/*      src={sm}*/}
-          {/*      width={40}*/}
-          {/*    />*/}
-          {/*    <div className="flex flex-col">*/}
-          {/*      <p className="text-md">ByteNode BOT - Byte | -49₽</p>*/}
-          {/*      <p className="text-small text-default-500">25.07.2024 12:52</p>*/}
-          {/*    </div>*/}
-          {/*  </CardHeader>*/}
-          {/*</Card>*/}
-        </div>
+        {history.length > 0 ? (
+          history.map((entry, index) => (
+            <Card className="max-w-[400px] mt-5" key={index}>
+              <CardHeader className="flex gap-3">
+                <Image
+                  alt="transaction icon"
+                  height={40}
+                  src={entry.operation === "replenishment" ? cd : sm}
+                  width={40}
+                  style={{ borderRadius: "8px" }} // Используем стиль для радиуса
+                />
+                <div className="flex flex-col">
+                  <p className="text-md">
+                    {entry.operation === "replenishment"
+                      ? `Пополнение | ${entry.sum}₽`
+                      : `${entry.product} | ${entry.sum}₽`}
+                  </p>
+                  <p className="text-small text-default-500">
+                    {entry.created_at}
+                  </p>
+                </div>
+              </CardHeader>
+            </Card>
+          ))
+        ) : (
+          <p className="text-center mt-5">Нет истории баланса</p>
+        )}
       </div>
     </main>
   );

@@ -52,21 +52,12 @@ nextjs-portal {
   user-select: none;
 }
 
+_next {
+  background: #121017 !important;
+}
+
 html {
-  background: linear-gradient(to bottom,
-  #121017 0%,
-  #121017 50%,
-  #100f14 55%,
-  #0e0d12 60%,
-  #0c0b0f 65%,
-  #0a090c 70%,
-  #080708 75%,
-  #060506 80%,
-  #040304 85%,
-  #020202 90%,
-  #000000 95%,
-  #000000 100%
-  );
+  background: #121017 !important;
 }
 
 .prekolbg {
@@ -94,6 +85,7 @@ html {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  background: #121017 !important;
 }
 
 .navflex {
@@ -109,25 +101,13 @@ html {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    background: #121017 !important;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-  #121017 0%,
-  #121017 50%,
-  #100f14 55%,
-  #0e0d12 60%,
-  #0c0b0f 65%,
-  #0a090c 70%,
-  #080708 75%,
-  #060506 80%,
-  #040304 85%,
-  #020202 90%,
-  #000000 95%,
-  #000000 100%
-  );
+  background: #121017 !important;
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
@@ -136,8 +116,14 @@ body {
   scroll-behavior: smooth;
 }
 
+body {
+  margin-top: 52px; /* Устанавливаем отступ равный высоте nav + padding */
+}
+
 nav {
   position: fixed;
+  top: 0;
+  left: 0;
   background: rgba(24, 22, 26, 0.75);
   height: 52px;
   width: 100%;
@@ -148,6 +134,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   backdrop-filter: blur(10px);
+  z-index: 1000; /* Устанавливаем высокий z-index, чтобы nav оставался на переднем плане */
 }
 
 .logo {
@@ -288,9 +275,80 @@ main {
   margin-top: 10px;
 }
 
+.content {
+  display: flex;
+  justify-content: center;
+  margin-left: 75px;
+  padding: 10px 10px 0px 10px;
+  width: calc(100% - 75px);
+  /*height: 100vh; !* Высота экрана *!*/
+  box-sizing: border-box;
+}
+
+.min-h-screen-nav {
+  min-height: calc(100vh - 52px);
+}
+
+.max-h-screen-nav {
+  max-height: calc(100vh - 52px);
+}
+
+.crd {
+  margin-top:52px;
+  min-height: 213px;
+  max-height: 223px;
+}
+
 @media (max-width: 820px) {
   .srvs {
     margin-left: calc(156px / 1.8);
+  }
+
+  .crd {
+    margin-top:0px;
+    padding: 10px 10px 10px 10px !important;
+    max-width:384px !important;
+    align-self: center;
+  }
+
+  body {
+    margin-top: 0px;
+  }
+
+  .avatarochka {
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  /*main {*/
+  /*  align-items: center;*/
+  /*  display: flex;*/
+  /*  flex-direction: column;*/
+  /*}*/
+
+  main {
+    flex: 1;
+  }
+  nav {
+    position: static; /* Убираем фиксированное позиционирование */
+  }
+
+
+  .content {
+    margin-left: 0px;
+    width: 100%;
+    height: calc(100vh - 52px); /* Учитываем высоту навигации */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden; /* Убираем скролл */
+  }
+
+  .sbar {
+    display: none !important; /* Скрыть элемент и не занимать место */
+    width: 0; /* Установить ширину в 0 */
+    height: 0; /* Установить высоту в 0 */
+    position: static; /* Установить позиционирование в static, чтобы не занимал места */
   }
 
   .flexoc {

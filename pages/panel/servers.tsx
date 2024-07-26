@@ -105,10 +105,10 @@ export default function MyComponent() {
   };
 
   return (
-    <main className="relative dark prekolbg1">
+    <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav">
       <SideBar />
-      <div className="srvs flex text-center justify-center content-center items-center flex-col">
-        <div className="flex items-center mb-[40px] mt-[106.96px]">
+      <div className="content flex flex-col items-center min-h-screen-nav max-h-screen-nav">
+        <div className="flex items-center mb-[40px]">
           <p className="text-[1.2rem] font-bold">Мои сервера</p>
           <Image
             src={pezda4}
