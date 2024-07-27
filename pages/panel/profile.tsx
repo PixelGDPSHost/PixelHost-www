@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { useRouter } from "next/router";
 import {
@@ -12,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
+  Card,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { SideBar } from "@/components/Components";
@@ -22,8 +21,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { EyeSlashFilledIcon } from "@/components/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "@/components/EyeFilledIcon";
 import Image from "next/image";
-import { Card } from "@nextui-org/react";
 import PencilIcon from "@/public/suhpaek.png";
+import { Skeleton } from "@nextui-org/skeleton";
 
 const Home = () => {
   const [avatar, setAvatar] = useState<string | null>(null);
@@ -34,6 +33,7 @@ const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [balance, setBalance] = useState("0");
+  const [loading, setLoading] = useState(true); // New state for loading
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -115,6 +115,9 @@ const Home = () => {
             if (balanceResponse.data && balanceResponse.data.balance) {
               setBalance(balanceResponse.data.balance);
             }
+
+            // Set loading to false after fetching data
+            setLoading(false);
           } else {
             if (
               router.pathname.startsWith("/panel") &&
@@ -131,9 +134,11 @@ const Home = () => {
           ) {
             router.push("/panel/login");
           }
+          setLoading(false);
         }
       } else {
         router.push("/panel/login");
+        setLoading(false);
       }
     };
 
@@ -284,13 +289,17 @@ const Home = () => {
           <Divider className="mb-3" />
           <div className="relative flex gap-3">
             <div className="relative">
-              <Image
-                src={avatar || "/default-avatar.png"} // Fallback to a default image if avatar is null
-                className="rounded-xl avatarochka"
-                alt="avatar"
-                width={150}
-                height={150}
-              />
+              {loading ? (
+                <Skeleton className="rounded-xl avatarochka w-[150px] h-[150px]" />
+              ) : (
+                <Image
+                  src={avatar || "/default-avatar.png"}
+                  className="rounded-xl avatarochka"
+                  alt="avatar"
+                  width={150}
+                  height={150}
+                />
+              )}
               <div
                 onClick={triggerFileInput}
                 className="absolute bottom-0 right-0 bg-black bg-opacity-50 p-1.5 rounded-full cursor-pointer flex items-center justify-center"
@@ -306,22 +315,30 @@ const Home = () => {
               </div>
             </div>
             <div className="gap-4 flex items-center justify-center flex-col">
-              <Input
-                value={username}
-                startContent={
-                  <div className="pointer-events-none flex items-center">
-                    <span className="text-default-400 text-xl">@</span>
-                  </div>
-                }
-                isDisabled={true}
-              />
-              <Input
-                value={balance}
-                startContent={
-                  <span className="text-default-400 text-xl">₽</span>
-                }
-                isDisabled={true}
-              />
+              {loading ? (
+                <Skeleton className="w-[150px] h-[40px]" />
+              ) : (
+                <Input
+                  value={username}
+                  startContent={
+                    <div className="pointer-events-none flex items-center">
+                      <span className="text-default-400 text-xl">@</span>
+                    </div>
+                  }
+                  isDisabled={true}
+                />
+              )}
+              {loading ? (
+                <Skeleton className="w-[150px] h-[40px]" />
+              ) : (
+                <Input
+                  value={balance}
+                  startContent={
+                    <span className="text-default-400 text-xl">₽</span>
+                  }
+                  isDisabled={true}
+                />
+              )}
             </div>
           </div>
         </Card>

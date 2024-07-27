@@ -66,9 +66,9 @@ export default function MyComponent() {
   }, [router]);
 
   return (
-    <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav flex">
-      <SideBar />
-      <div className="flex-1 flex justify-center items-center">
+    <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav">
+      <div className="content flex flex-col items-center min-h-screen-nav max-h-screen-nav">
+        <SideBar />
         <div className="w-[341px] h-[231px] bg-black borderr7 flex items-center justify-center text-center p-5">
           <p>Привет, возможно вместо этого текста тут что-то будет</p>
         </div>

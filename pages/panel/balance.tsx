@@ -171,8 +171,8 @@ export default function MyComponent() {
         </ModalContent>
       </Modal>
       <SideBar></SideBar>
-      <div className="flex flex-col justify-center content-center items-center">
-        <div className="flex justify-center text-center content-center items-center self-center mt-[56.96px]">
+      <div className="content flex flex-col items-center min-h-screen-nav max-h-screen-nav p-0-imp">
+        <div className="flex justify-center text-center content-center items-center self-center">
           <p className="mr-3">{balance}₽</p>
           <Button color="primary" onPress={onOpen}>
             Пополнить
