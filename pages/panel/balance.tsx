@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import cd from "@/public/CheckDollar.png";
 import sm from "@/public/SplitMoney.png";
-import { SRVCard, SideBar } from "@/components/Components";
+import { SRVCard, SideBar, BBar } from "@/components/Components";
 import {
   Modal,
   ModalContent,
@@ -20,13 +20,23 @@ import { Card, CardHeader } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-// Определите тип данных для транзакций
+// Define the type for transaction data
 interface Transaction {
   operation: string;
   sum: number;
   product?: string;
   created_at: string;
+}
+
+// Define the type for user data
+interface User {
+  id: number;
+  mail: string;
+  uname: string;
+  name: string;
+  avatar: string;
 }
 
 export default function MyComponent() {
@@ -35,6 +45,9 @@ export default function MyComponent() {
   const [balance, setBalance] = useState(0);
   const [history, setHistory] = useState<Transaction[]>([]);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [user, setUser] = useState<User | null>(null); // Store user info
+  const [amount, setAmount] = useState<number | null>(null); // Store amount for payment
+  const [paymentSystemId, setPaymentSystemId] = useState<string | null>(null); // Store selected payment system
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -64,11 +77,13 @@ export default function MyComponent() {
             data.user.avatar
           ) {
             setIsAuthenticated(true);
+            setUser(data.user); // Set user data
+
             if (router.pathname === "/panel/login") {
               router.push("/panel");
             }
 
-            // Получаем баланс
+            // Get balance
             const balanceResponse = await axios.post(
               "https://api.bytenode.cc/v1/user/balance",
               formData,
@@ -83,7 +98,7 @@ export default function MyComponent() {
               setBalance(balanceResponse.data.balance);
             }
 
-            // Получаем историю баланса
+            // Get balance history
             const historyResponse = await axios.post(
               "https://api.bytenode.cc/v1/user/balance/history",
               formData,
@@ -130,6 +145,61 @@ export default function MyComponent() {
     router.push("/panel/servers");
   };
 
+  const handlePayment = async () => {
+    if (!user || !amount || !paymentSystemId) {
+      console.error("Missing required payment data");
+      return;
+    }
+
+    const minAmount = paymentSystemId === "42" ? 500 : 500;
+
+    if (amount < minAmount) {
+      toast.error(
+        `Минимальная сумма для выбранного способа оплаты: ${minAmount}₽`,
+      );
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("amount", amount.toString()); // Сумма платежа
+    // formData.append("payment_id", new Date().toISOString().replace(/[^0-9]/g, "")); // Уникальный payment_id
+    formData.append("us_uname", user.uname); // Имя пользователя
+    formData.append("email", user.mail); // Электронная почта
+    formData.append("ip", await getUserIp()); // IP адрес пользователя
+    formData.append("payment_id", paymentSystemId); // ID платежной системы
+
+    try {
+      const response = await axios.post(
+        "https://pay.bytenode.cc/create-payment", // Убедитесь, что это правильный URL
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Указываем, что передаем данные формы
+          },
+        },
+      );
+
+      if (response.data.location) {
+        router.push(response.data.location); // Перенаправляем на страницу платежа
+      } else {
+        toast.error(response.data.detail || "Не удалось создать платеж");
+      }
+    } catch (error) {
+      console.error("Error creating payment:", error);
+      toast.error("Ошибка создания платежа");
+    }
+  };
+
+  const getUserIp = async (): Promise<string> => {
+    try {
+      const response = await axios.get("https://api.ipify.org?format=json");
+      return response.data.ip;
+    } catch (error) {
+      console.error("Error fetching IP address:", error);
+      return "0.0.0.0"; // Return a default IP if fetching fails
+    }
+  };
+
   return (
     <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav">
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -144,6 +214,7 @@ export default function MyComponent() {
                   label="Способ Оплаты"
                   orientation="horizontal"
                   isRequired
+                  onValueChange={setPaymentSystemId} // Update the selected payment method
                 >
                   <Radio value="42">СБП</Radio>
                   <Radio value="6">Yoomoney</Radio>
@@ -157,12 +228,17 @@ export default function MyComponent() {
                       <span className="text-default-400 text-small">₽</span>
                     </div>
                   }
-                  min="150"
+                  min={paymentSystemId === "42" ? "500" : "150"}
                   isRequired
+                  onChange={(e) => setAmount(parseFloat(e.target.value))} // Use onChange instead of onValueChange
                 />
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onPress={onClose} className="w-full">
+                <Button
+                  color="primary"
+                  onPress={handlePayment}
+                  className="w-full"
+                >
                   Перейти к оплате
                 </Button>
               </ModalFooter>
@@ -189,7 +265,7 @@ export default function MyComponent() {
                   height={40}
                   src={entry.operation === "replenishment" ? cd : sm}
                   width={40}
-                  style={{ borderRadius: "8px" }} // Используем стиль для радиуса
+                  style={{ borderRadius: "8px" }} // Use style for radius
                 />
                 <div className="flex flex-col">
                   <p className="text-md">
@@ -208,6 +284,7 @@ export default function MyComponent() {
           <p className="text-center mt-5">Нет истории баланса</p>
         )}
       </div>
+      <BBar></BBar>
     </main>
   );
 }

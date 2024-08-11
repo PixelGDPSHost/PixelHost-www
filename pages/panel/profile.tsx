@@ -13,7 +13,7 @@ import {
   Card,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { SideBar } from "@/components/Components";
+import { BBar, SideBar } from "@/components/Components";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -343,6 +343,7 @@ const Home = () => {
           </div>
         </Card>
       </div>
+      <BBar></BBar>
     </main>
   );
 };

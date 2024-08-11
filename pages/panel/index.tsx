@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SideBar } from "@/components/Components";
+import { SideBar, BBar } from "@/components/Components";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
@@ -73,6 +73,7 @@ export default function MyComponent() {
           <p>Привет, возможно вместо этого текста тут что-то будет</p>
         </div>
       </div>
+      <BBar></BBar>
     </main>
   );
 }

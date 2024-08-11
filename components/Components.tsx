@@ -463,3 +463,51 @@ export const Footer = () => {
     </footer>
   );
 };
+
+export const BBar = () => {
+  const router = useRouter();
+
+  const gotoMain = () => {
+    router.push("/panel");
+  };
+
+  const gotoSrvs = () => {
+    router.push("/panel/servers");
+  };
+
+  const gotoBalance = () => {
+    router.push("/panel/balance");
+  };
+
+  const gotoProfile = () => {
+    router.push("/panel/profile");
+  };
+  return (
+    <div className="bbar sbarbg">
+      <div
+        className="w-[35px] h-[35px] bg-[#110F16] borderr8 flex items-center justify-center cursor-pointer"
+        onClick={gotoMain}
+      >
+        <Image src={pezda} alt="DashboardLayout" />
+      </div>
+      <div
+        className="w-[35px] h-[35px] bg-[#110F16] borderr8 flex items-center justify-center cursor-pointer"
+        onClick={gotoSrvs}
+      >
+        <Image src={pezda1} alt="DashboardLayout" />
+      </div>
+      <div
+        className="w-[35px] h-[35px] bg-[#110F16] borderr8 flex items-center justify-center cursor-pointer"
+        onClick={gotoBalance}
+      >
+        <Image src={pezda2} alt="DashboardLayout" />
+      </div>
+      <div
+        className="w-[35px] h-[35px] bg-[#110F16] borderr8 flex items-center justify-center cursor-pointer"
+        onClick={gotoProfile}
+      >
+        <Image src={pezda3} alt="DashboardLayout" />
+      </div>
+    </div>
+  );
+};

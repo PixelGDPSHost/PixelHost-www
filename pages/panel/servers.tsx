@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import pezda4 from "@/public/Add.png";
 import pezda5 from "@/public/Rectangle 186.png";
-import { SRVCard, SideBar } from "@/components/Components";
+import { SRVCard, SideBar, BBar } from "@/components/Components";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -139,6 +139,7 @@ export default function MyComponent() {
           ))}
         </div>
       </div>
+      <BBar></BBar>
     </main>
   );
 }
