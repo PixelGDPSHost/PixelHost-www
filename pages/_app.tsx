@@ -10,7 +10,9 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { Avatar } from "@/components/Components";
+import { Avatar, Preloader } from "@/components/Components";
+import { preloadAtom } from "@/atoms";
+import { useAtom } from "jotai";
 
 // Define the Inter font
 const inter = Inter({ subsets: ["latin"] });
@@ -24,6 +26,26 @@ interface RootLayoutProps {
 export default function RootLayout({ Component, pageProps }: RootLayoutProps) {
   const r = useRouter();
   const [avatar, setAvatar] = useState<string | null>(null);
+
+  const [, setPreloading] = useAtom(preloadAtom);
+
+  // Устанавливаем состояние прелоадера, когда все данные и ресурсы загружены
+  useEffect(() => {
+    const handleWindowLoad = () => {
+      setPreloading(false);
+    };
+
+    // Отслеживаем полную загрузку страницы (включая все изображения и ресурсы)
+    if (document.readyState === "complete") {
+      setPreloading(false);
+    } else {
+      window.addEventListener("load", handleWindowLoad);
+    }
+
+    return () => {
+      window.removeEventListener("load", handleWindowLoad);
+    };
+  }, [setPreloading]);
 
   useEffect(() => {
     const fetchAvatar = async () => {

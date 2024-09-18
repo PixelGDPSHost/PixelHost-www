@@ -106,7 +106,7 @@ export default function MyComponent() {
 
   return (
     <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav">
-      <SideBar />
+      <SideBar active="servers" />
       <div className="content flex flex-col items-center min-h-screen-nav max-h-screen-nav">
         <div className="flex items-center mb-[40px]">
           <p className="text-[1.2rem] font-bold">Мои сервера</p>
@@ -139,7 +139,7 @@ export default function MyComponent() {
           ))}
         </div>
       </div>
-      <BBar></BBar>
+      <BBar active="servers"></BBar>
     </main>
   );
 }

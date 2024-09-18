@@ -282,7 +282,7 @@ const Home = () => {
           )}
         </ModalContent>
       </Modal>
-      <SideBar />
+      <SideBar active="profile" />
       <div className="content flex min-h-screen-nav max-h-screen-nav">
         <Card className="p-3 crd">
           <h1 className="mb-4">Аккаунт</h1>
@@ -343,7 +343,7 @@ const Home = () => {
           </div>
         </Card>
       </div>
-      <BBar></BBar>
+      <BBar active="profile"></BBar>
     </main>
   );
 };

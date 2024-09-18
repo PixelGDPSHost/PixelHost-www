@@ -26,6 +26,8 @@ import pezda2 from "@/public/MoneyBag.png";
 import pezda3 from "@/public/User.png";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { useAtom } from "jotai";
+import { preloadAtom } from "@/atoms";
 
 // Props type for SCard component
 interface SCardP {
@@ -378,7 +380,11 @@ export const AvatarinProfile: React.FC = () => {
   );
 };
 
-export const SideBar = () => {
+interface SideBarProps {
+  active: "main" | "servers" | "balance" | "profile";
+}
+
+export const SideBar = ({ active }: SideBarProps) => {
   const router = useRouter();
 
   const gotoMain = () => {
@@ -400,25 +406,33 @@ export const SideBar = () => {
   return (
     <div className="w-[60px] min-h-screen-nav max-h-screen-nav sbarbg p-[12.5px] flex flex-col items-center borderr8 absolute left-0 top-0 sbar">
       <div
-        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
+        className={`w-[35px] h-[35px] mt-[15px] borderr8 flex items-center justify-center cursor-pointer transition-all ${
+          active === "main" ? "bg-[#5e62ff]" : "bg-[#110F16]"
+        }`}
         onClick={gotoMain}
       >
         <Image src={pezda} alt="DashboardLayout" />
       </div>
       <div
-        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
+        className={`w-[35px] h-[35px] mt-[15px] borderr8 flex items-center justify-center cursor-pointer transition-all ${
+          active === "servers" ? "bg-[#5e62ff]" : "bg-[#110F16]"
+        }`}
         onClick={gotoSrvs}
       >
         <Image src={pezda1} alt="DashboardLayout" />
       </div>
       <div
-        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
+        className={`w-[35px] h-[35px] mt-[15px] borderr8 flex items-center justify-center cursor-pointer transition-all ${
+          active === "balance" ? "bg-[#5e62ff]" : "bg-[#110F16]"
+        }`}
         onClick={gotoBalance}
       >
         <Image src={pezda2} alt="DashboardLayout" />
       </div>
       <div
-        className="w-[35px] h-[35px] bg-[#110F16] mt-[15px] borderr8 flex items-center justify-center cursor-pointer"
+        className={`w-[35px] h-[35px] mt-[15px] borderr8 flex items-center justify-center cursor-pointer transition-all ${
+          active === "profile" ? "bg-[#5e62ff]" : "bg-[#110F16]"
+        }`}
         onClick={gotoProfile}
       >
         <Image src={pezda3} alt="DashboardLayout" />
@@ -464,7 +478,11 @@ export const Footer = () => {
   );
 };
 
-export const BBar = () => {
+interface BBarProps {
+  active: "main" | "servers" | "balance" | "profile";
+}
+
+export const BBar = ({ active }: BBarProps) => {
   const router = useRouter();
 
   const gotoMain = () => {
@@ -485,29 +503,51 @@ export const BBar = () => {
   return (
     <div className="bbar sbarbg">
       <div
-        className="w-[35px] h-[35px] bg-[#110F16] borderr8 flex items-center justify-center cursor-pointer"
+        className={`w-[35px] h-[35px] borderr8 flex items-center justify-center cursor-pointer ${
+          active === "main" ? "bg-[#5e62ff]" : "bg-[#110F16]"
+        }`}
         onClick={gotoMain}
       >
         <Image src={pezda} alt="DashboardLayout" />
       </div>
       <div
-        className="w-[35px] h-[35px] bg-[#110F16] borderr8 flex items-center justify-center cursor-pointer"
+        className={`w-[35px] h-[35px] borderr8 flex items-center justify-center cursor-pointer ${
+          active === "servers" ? "bg-[#5e62ff]" : "bg-[#110F16]"
+        }`}
         onClick={gotoSrvs}
       >
         <Image src={pezda1} alt="DashboardLayout" />
       </div>
       <div
-        className="w-[35px] h-[35px] bg-[#110F16] borderr8 flex items-center justify-center cursor-pointer"
+        className={`w-[35px] h-[35px] borderr8 flex items-center justify-center cursor-pointer ${
+          active === "balance" ? "bg-[#5e62ff]" : "bg-[#110F16]"
+        }`}
         onClick={gotoBalance}
       >
         <Image src={pezda2} alt="DashboardLayout" />
       </div>
       <div
-        className="w-[35px] h-[35px] bg-[#110F16] borderr8 flex items-center justify-center cursor-pointer"
+        className={`w-[35px] h-[35px] borderr8 flex items-center justify-center cursor-pointer ${
+          active === "profile" ? "bg-[#5e62ff]" : "bg-[#110F16]"
+        }`}
         onClick={gotoProfile}
       >
         <Image src={pezda3} alt="DashboardLayout" />
       </div>
     </div>
+  );
+};
+
+export const Preloader = () => {
+  const isPrelaoding = useAtom(preloadAtom);
+
+  if (!isPrelaoding) return null;
+
+  return (
+    <Card className="fixed top-0 left-0 width-[100vw] height-[100vh] flex align-center justify-center preloaderbg">
+      <CardBody>
+        <div className="preloader-spinner"></div>
+      </CardBody>
+    </Card>
   );
 };

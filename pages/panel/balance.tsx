@@ -219,6 +219,8 @@ export default function MyComponent() {
                   <Radio value="42">СБП</Radio>
                   <Radio value="6">Yoomoney</Radio>
                   <Radio value="12">МИР</Radio>
+                  <Radio value="32">Visa UAH</Radio>
+                  <Radio value="9">MasterCard UAH</Radio>
                 </RadioGroup>
                 <Input
                   type="number"
@@ -246,7 +248,7 @@ export default function MyComponent() {
           )}
         </ModalContent>
       </Modal>
-      <SideBar></SideBar>
+      <SideBar active="balance"></SideBar>
       <div className="content flex flex-col items-center min-h-screen-nav max-h-screen-nav p-0-imp">
         <div className="flex justify-center text-center content-center items-center self-center">
           <p className="mr-3">{balance}₽</p>
@@ -284,7 +286,7 @@ export default function MyComponent() {
           <p className="text-center mt-5">Нет истории баланса</p>
         )}
       </div>
-      <BBar></BBar>
+      <BBar active="balance"></BBar>
     </main>
   );
 }

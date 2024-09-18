@@ -68,12 +68,12 @@ export default function MyComponent() {
   return (
     <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav">
       <div className="content flex flex-col items-center min-h-screen-nav max-h-screen-nav">
-        <SideBar />
+        <SideBar active="main" />
         <div className="w-[341px] h-[231px] bg-black borderr7 flex items-center justify-center text-center p-5">
           <p>Привет, возможно вместо этого текста тут что-то будет</p>
         </div>
       </div>
-      <BBar></BBar>
+      <BBar active="main"></BBar>
     </main>
   );
 }
