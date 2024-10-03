@@ -71,19 +71,20 @@ export const TDCard: React.FC<TDCardP> = ({
   backup,
   color,
 }) => {
-  const notify = () => {
-    toast.error("Жди до 30.06.2024!", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-  };
+  const router = useRouter()
+  // const notify = () => {
+  //   toast.error("Жди до 30.06.2024!", {
+  //     position: "bottom-right",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //     transition: Bounce,
+  //   });
+  // };
 
   return (
     <div>
@@ -128,7 +129,7 @@ export const TDCard: React.FC<TDCardP> = ({
           ></img>
           Бэкапы: {backup}
         </p>
-        <Button color="primary" onClick={notify}>
+        <Button color="primary" onClick={() => router.push("/panel/create/discord?plan=" + title)}>
           Выбрать
         </Button>
       </div>
