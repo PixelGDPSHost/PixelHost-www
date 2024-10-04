@@ -11,6 +11,13 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Input,
+  useDisclosure,
 } from "@nextui-org/react";
 import { Bounce, toast } from "react-toastify";
 import Image from "next/image";
@@ -71,20 +78,18 @@ export const TDCard: React.FC<TDCardP> = ({
   backup,
   color,
 }) => {
-  const router = useRouter()
-  // const notify = () => {
-  //   toast.error("Жди до 30.06.2024!", {
-  //     position: "bottom-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "dark",
-  //     transition: Bounce,
-  //   });
-  // };
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [serverName, setServerName] = useState("");
+  const router = useRouter();
+
+  const handleConfirm = () => {
+    if (serverName) {
+      router.push(`/panel/create/discord?plan=${title}&name=${serverName}`);
+      onOpenChange();
+    } else {
+      alert("Введите имя сервера!");
+    }
+  };
 
   return (
     <div>
@@ -129,10 +134,39 @@ export const TDCard: React.FC<TDCardP> = ({
           ></img>
           Бэкапы: {backup}
         </p>
-        <Button color="primary" onClick={() => router.push("/panel/create/discord?plan=" + title)}>
+        <Button color="primary" onPress={onOpen}>
           Выбрать
         </Button>
       </div>
+
+      {/* Modal for inputting server name */}
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Введите имя сервера
+              </ModalHeader>
+              <ModalBody>
+                <Input
+                  label="Имя сервера"
+                  placeholder="Введите имя"
+                  value={serverName}
+                  onChange={(e) => setServerName(e.target.value)}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Отмена
+                </Button>
+                <Button color="primary" onPress={handleConfirm}>
+                  Подтвердить
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
