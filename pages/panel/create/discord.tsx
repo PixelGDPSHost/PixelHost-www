@@ -24,7 +24,7 @@ export default function CreateDiscord() {
           formData.append("cookie", authCookie);
 
           const response = await axios.post(
-            "http://127.0.0.1:3443/user",
+            "https://api.bytenode.cc/user",
             formData,
             {
               headers: {
