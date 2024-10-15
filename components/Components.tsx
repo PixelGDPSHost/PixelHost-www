@@ -270,7 +270,7 @@ export const Avatar: React.FC<AvatarP> = ({ className }) => {
 
         try {
           const response = await axios.post(
-            "http://127.0.0.1:3443/user",
+            "https://api.bytenode.cc/user",
             formData,
             {
               headers: {
@@ -373,7 +373,7 @@ export const AvatarinProfile: React.FC = () => {
 
         try {
           const response = await axios.post(
-            "http://127.0.0.1:3443/user",
+            "https://api.bytenode.cc/user",
             formData,
             {
               headers: {

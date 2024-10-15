@@ -56,7 +56,7 @@ export default function RootLayout({ Component, pageProps }: RootLayoutProps) {
 
         try {
           const response = await axios.post(
-            "http://api.bytenode.cc/user",
+            "https://api.bytenode.cc/user",
             formData,
             {
               headers: {

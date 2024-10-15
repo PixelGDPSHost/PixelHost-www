@@ -59,7 +59,7 @@ export default function MyComponent() {
           formData.append("cookie", authCookie);
 
           const userResponse = await axios.post(
-            "http://api.bytenode.cc/user",
+            "https://api.bytenode.cc/user",
             formData,
             {
               headers: {
