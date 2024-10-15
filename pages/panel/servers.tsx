@@ -63,7 +63,7 @@ export default function MyComponent() {
 
             // Fetching server data
             const serverResponse = await axios.post(
-              "https://api.bytenode.cc/v1/user/buyed",
+              "https://api.bytenode.cc/user/buyed",
               formData,
               {
                 headers: {
