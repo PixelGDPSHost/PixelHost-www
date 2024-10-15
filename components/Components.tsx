@@ -35,6 +35,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useAtom } from "jotai";
 import { preloadAtom } from "@/atoms";
+import { Spinner } from "@nextui-org/spinner";
 
 // Props type for SCard component
 interface SCardP {
@@ -269,7 +270,7 @@ export const Avatar: React.FC<AvatarP> = ({ className }) => {
 
         try {
           const response = await axios.post(
-            "https://api.bytenode.cc/v1/user",
+            "http://127.0.0.1:3443/user",
             formData,
             {
               headers: {
@@ -372,7 +373,7 @@ export const AvatarinProfile: React.FC = () => {
 
         try {
           const response = await axios.post(
-            "https://api.bytenode.cc/v1/user",
+            "http://127.0.0.1:3443/user",
             formData,
             {
               headers: {
@@ -574,15 +575,14 @@ export const BBar = ({ active }: BBarProps) => {
 };
 
 export const Preloader = () => {
-  const isPrelaoding = useAtom(preloadAtom);
-
-  if (!isPrelaoding) return null;
+  // const isPrelaoding = useAtom(preloadAtom);
+  //
+  // if (!isPrelaoding) return null;
 
   return (
-    <Card className="fixed top-0 left-0 width-[100vw] height-[100vh] flex align-center justify-center preloaderbg">
-      <CardBody>
-        <div className="preloader-spinner"></div>
-      </CardBody>
-    </Card>
+    <div className="w-[100vw] h-[100vh] flex flex-col align-center justify-center items-center">
+      <Spinner size="lg" color="primary"></Spinner>
+      <h1 className="text-xl">Подождите, идет загрузка страницы</h1>
+    </div>
   );
 };

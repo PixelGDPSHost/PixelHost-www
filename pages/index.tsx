@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   return (
     <main className="dark text-foreground prekolbg">
+      <div className="navflex z-40">Сборка от </div>
       <div className="skid">
         <center>
           <h1 className="text-5xl font-semibold pixelhostbig">ByteNode</h1>

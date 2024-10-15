@@ -37,7 +37,7 @@ const Home: React.FC = () => {
 
         try {
           const response = await axios.post(
-            "https://api.bytenode.cc/v1/user",
+            "https://api.bytenode.cc/user",
             formData,
             {
               headers: {
@@ -90,7 +90,7 @@ const Home: React.FC = () => {
       formData.append("passwd", password);
 
       const response = await axios.post(
-        "https://api.bytenode.cc/v1/login",
+        "https://api.bytenode.cc/login",
         formData,
         {
           headers: {

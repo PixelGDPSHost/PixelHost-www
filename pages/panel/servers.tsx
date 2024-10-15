@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import pezda4 from "@/public/Add.png";
 import pezda5 from "@/public/Rectangle 186.png";
-import { SRVCard, SideBar, BBar } from "@/components/Components";
+import { SRVCard, SideBar, BBar, Preloader } from "@/components/Components"; // Предполагается, что Preloader есть в Components
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -27,6 +27,7 @@ export default function MyComponent() {
     gdps_servers: [],
     discord_bots: [],
   });
+  const [loading, setLoading] = useState<boolean>(true); // состояние для прелоадера
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -37,7 +38,7 @@ export default function MyComponent() {
           formData.append("cookie", authCookie);
 
           const response = await axios.post(
-            "https://api.bytenode.cc/v1/user",
+            "https://api.bytenode.cc/user",
             formData,
             {
               headers: {
@@ -87,6 +88,8 @@ export default function MyComponent() {
           ) {
             router.push("/panel/login");
           }
+        } finally {
+          setLoading(false); // Отключаем прелоадер после завершения запроса
         }
       } else {
         router.push("/panel/login");
@@ -104,6 +107,13 @@ export default function MyComponent() {
     router.push("/panel/servers");
   };
 
+  if (loading) {
+    return <Preloader />; // Показ прелоадера во время загрузки
+  }
+
+  const isServersEmpty =
+    servers.gdps_servers.length === 0 && servers.discord_bots.length === 0;
+
   return (
     <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav">
       <SideBar active="servers" />
@@ -118,28 +128,32 @@ export default function MyComponent() {
             className="w-[30px] h-[30px] ml-[10px] cursor-pointer"
           />
         </div>
-        <div className="flexo gap-4">
-          {servers.gdps_servers.map((server) => (
-            <SRVCard
-              key={server.id}
-              title={server.name}
-              oplachen={server.payed.toString()} // Convert boolean to string
-              status={server.status}
-              type="gdps"
-            />
-          ))}
-          {servers.discord_bots.map((bot) => (
-            <SRVCard
-              key={bot.id}
-              title={bot.name}
-              oplachen={bot.payed.toString()} // Convert boolean to string
-              status={bot.status}
-              type="discord"
-            />
-          ))}
-        </div>
+        {isServersEmpty ? (
+          <p className="text-center">Упс, похоже, у вас нету серверов</p>
+        ) : (
+          <div className="flexo gap-4">
+            {servers.gdps_servers.map((server) => (
+              <SRVCard
+                key={server.id}
+                title={server.name}
+                oplachen={server.payed.toString()} // Convert boolean to string
+                status={server.status}
+                type="gdps"
+              />
+            ))}
+            {servers.discord_bots.map((bot) => (
+              <SRVCard
+                key={bot.id}
+                title={bot.name}
+                oplachen={bot.payed.toString()} // Convert boolean to string
+                status={bot.status}
+                type="discord"
+              />
+            ))}
+          </div>
+        )}
       </div>
-      <BBar active="servers"></BBar>
+      <BBar active="servers" />
     </main>
   );
 }

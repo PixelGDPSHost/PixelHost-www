@@ -45,7 +45,7 @@ const Home = () => {
 
       try {
         const response = await axios.post(
-          "https://api.bytenode.cc/v1/user",
+          "https://api.bytenode.cc/user",
           formData,
           {
             headers: {
@@ -76,7 +76,7 @@ const Home = () => {
           formData.append("cookie", authCookie);
 
           const userResponse = await axios.post(
-            "https://api.bytenode.cc/v1/user",
+            "https://api.bytenode.cc/user",
             formData,
             {
               headers: {
@@ -103,7 +103,7 @@ const Home = () => {
 
             // Получаем баланс
             const balanceResponse = await axios.post(
-              "https://api.bytenode.cc/v1/user/balance",
+              "https://api.bytenode.cc/user/balance",
               formData,
               {
                 headers: {
@@ -164,7 +164,7 @@ const Home = () => {
     formData.append("file", file);
 
     try {
-      await axios.post("https://api.bytenode.cc/v1/user/avatar", formData, {
+      await axios.post("https://api.bytenode.cc/user/avatar", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

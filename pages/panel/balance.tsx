@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import cd from "@/public/CheckDollar.png";
 import sm from "@/public/SplitMoney.png";
-import { SRVCard, SideBar, BBar } from "@/components/Components";
+import { SRVCard, SideBar, BBar, Preloader } from "@/components/Components"; // Убедитесь, что Preloader существует
 import {
   Modal,
   ModalContent,
@@ -22,7 +22,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// Define the type for transaction data
+// Определяем тип для данных о транзакциях
 interface Transaction {
   operation: string;
   sum: number;
@@ -30,7 +30,7 @@ interface Transaction {
   created_at: string;
 }
 
-// Define the type for user data
+// Определяем тип для данных о пользователе
 interface User {
   id: number;
   mail: string;
@@ -44,10 +44,11 @@ export default function MyComponent() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [balance, setBalance] = useState(0);
   const [history, setHistory] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(true); // Состояние для прелоадера
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [user, setUser] = useState<User | null>(null); // Store user info
-  const [amount, setAmount] = useState<number | null>(null); // Store amount for payment
-  const [paymentSystemId, setPaymentSystemId] = useState<string | null>(null); // Store selected payment system
+  const [user, setUser] = useState<User | null>(null);
+  const [amount, setAmount] = useState<number | null>(null);
+  const [paymentSystemId, setPaymentSystemId] = useState<string | null>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -58,7 +59,7 @@ export default function MyComponent() {
           formData.append("cookie", authCookie);
 
           const userResponse = await axios.post(
-            "https://api.bytenode.cc/v1/user",
+            "http://api.bytenode.cc/user",
             formData,
             {
               headers: {
@@ -77,15 +78,15 @@ export default function MyComponent() {
             data.user.avatar
           ) {
             setIsAuthenticated(true);
-            setUser(data.user); // Set user data
+            setUser(data.user);
 
             if (router.pathname === "/panel/login") {
               router.push("/panel");
             }
 
-            // Get balance
+            // Получаем баланс
             const balanceResponse = await axios.post(
-              "https://api.bytenode.cc/v1/user/balance",
+              "https://api.bytenode.cc/user/balance",
               formData,
               {
                 headers: {
@@ -98,9 +99,9 @@ export default function MyComponent() {
               setBalance(balanceResponse.data.balance);
             }
 
-            // Get balance history
+            // Получаем историю баланса
             const historyResponse = await axios.post(
-              "https://api.bytenode.cc/v1/user/balance/history",
+              "https://api.bytenode.cc/user/balance/history",
               formData,
               {
                 headers: {
@@ -121,13 +122,15 @@ export default function MyComponent() {
             }
           }
         } catch (error) {
-          console.error("Error checking authentication:", error);
+          console.error("Ошибка проверки аутентификации:", error);
           if (
             router.pathname.startsWith("/panel") &&
             router.pathname !== "/panel/login"
           ) {
             router.push("/panel/login");
           }
+        } finally {
+          setLoading(false); // Завершаем показ прелоадера
         }
       } else {
         router.push("/panel/login");
@@ -137,17 +140,9 @@ export default function MyComponent() {
     checkAuth();
   }, [router]);
 
-  const gotoMain = () => {
-    router.push("/panel");
-  };
-
-  const gotoSrvs = () => {
-    router.push("/panel/servers");
-  };
-
   const handlePayment = async () => {
     if (!user || !amount || !paymentSystemId) {
-      console.error("Missing required payment data");
+      console.error("Отсутствуют необходимые данные для платежа");
       return;
     }
 
@@ -161,20 +156,19 @@ export default function MyComponent() {
     }
 
     const formData = new FormData();
-    formData.append("amount", amount.toString()); // Сумма платежа
-    // formData.append("payment_id", new Date().toISOString().replace(/[^0-9]/g, "")); // Уникальный payment_id
-    formData.append("us_uname", user.uname); // Имя пользователя
-    formData.append("email", user.mail); // Электронная почта
-    formData.append("ip", await getUserIp()); // IP адрес пользователя
-    formData.append("payment_id", paymentSystemId); // ID платежной системы
+    formData.append("amount", amount.toString());
+    formData.append("us_uname", user.uname);
+    formData.append("email", user.mail);
+    formData.append("ip", await getUserIp());
+    formData.append("payment_id", paymentSystemId);
 
     try {
       const response = await axios.post(
-        "https://pay.bytenode.cc/create-payment", // Убедитесь, что это правильный URL
+        "https://pay.bytenode.cc/create-payment",
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Указываем, что передаем данные формы
+            "Content-Type": "multipart/form-data",
           },
         },
       );
@@ -185,7 +179,7 @@ export default function MyComponent() {
         toast.error(response.data.detail || "Не удалось создать платеж");
       }
     } catch (error) {
-      console.error("Error creating payment:", error);
+      console.error("Ошибка создания платежа:", error);
       toast.error("Ошибка создания платежа");
     }
   };
@@ -195,10 +189,14 @@ export default function MyComponent() {
       const response = await axios.get("https://api.ipify.org?format=json");
       return response.data.ip;
     } catch (error) {
-      console.error("Error fetching IP address:", error);
-      return "0.0.0.0"; // Return a default IP if fetching fails
+      console.error("Ошибка получения IP адреса:", error);
+      return "0.0.0.0"; // Возвращаем IP по умолчанию, если произошла ошибка
     }
   };
+
+  if (loading) {
+    return <Preloader />; // Показ прелоадера во время загрузки
+  }
 
   return (
     <main className="relative dark prekolbg1 min-h-screen-nav max-h-screen-nav">
@@ -214,7 +212,7 @@ export default function MyComponent() {
                   label="Способ Оплаты"
                   orientation="horizontal"
                   isRequired
-                  onValueChange={setPaymentSystemId} // Update the selected payment method
+                  onValueChange={setPaymentSystemId}
                 >
                   <Radio value="42">СБП</Radio>
                   <Radio value="6">Yoomoney</Radio>
@@ -232,7 +230,7 @@ export default function MyComponent() {
                   }
                   min={paymentSystemId === "42" ? "500" : "150"}
                   isRequired
-                  onChange={(e) => setAmount(parseFloat(e.target.value))} // Use onChange instead of onValueChange
+                  onChange={(e) => setAmount(parseFloat(e.target.value))}
                 />
               </ModalBody>
               <ModalFooter>
@@ -267,7 +265,7 @@ export default function MyComponent() {
                   height={40}
                   src={entry.operation === "replenishment" ? cd : sm}
                   width={40}
-                  style={{ borderRadius: "8px" }} // Use style for radius
+                  style={{ borderRadius: "8px" }}
                 />
                 <div className="flex flex-col">
                   <p className="text-md">

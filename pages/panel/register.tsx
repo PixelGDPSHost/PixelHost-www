@@ -19,28 +19,56 @@ export default function Home() {
   const [turnstileToken, setTurnstileToken] = useState<string | undefined>(
     undefined,
   );
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const router = useRouter();
 
   useEffect(() => {
     const checkAuth = async () => {
-      try {
-        const response = await axios.post("https://api.bytenode.cc/v1/user");
-        const { data } = response;
-        if (data.user && data.user.id) {
-          router.push("/panel");
+      const token = Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA");
+      if (token) {
+        const formData = new FormData();
+        formData.append("cookie", token);
+
+        try {
+          const response = await axios.post(
+            "https://api.bytenode.cc/user",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            },
+          );
+
+          const { data } = response;
+          if (
+            data.user &&
+            data.user.id &&
+            data.user.mail &&
+            data.user.uname &&
+            data.user.name &&
+            data.user.avatar
+          ) {
+            setIsAuthenticated(true);
+          }
+        } catch (error) {
+          console.error("Error checking authentication:", error);
         }
-      } catch (error) {
-        console.error("Error checking authentication:", error);
       }
     };
 
-    if (Cookies.get("PIXEL_AUTH_DO_NOT_TOUCH_THIS_NIGGA")) {
-      router.push("/panel");
-    } else {
+    // Only run on the client side
+    if (typeof window !== "undefined") {
       checkAuth();
     }
-  }, [router]);
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/panel");
+    }
+  }, [isAuthenticated, router]);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -53,15 +81,11 @@ export default function Home() {
       formData.append("passwd", password);
       formData.append("CF_TURNSTILE", turnstileToken || "");
 
-      const resp = await axios.post(
-        "https://api.bytenode.cc/v1/reg",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+      const resp = await axios.post("https://api.bytenode.cc/reg", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-      );
+      });
 
       if (resp.status === 200) {
         const respdata = resp.data;
@@ -145,16 +169,16 @@ export default function Home() {
           />
         </center>
 
-        <div className="flex flex-col mb-[11px]">
+        <div className="flex gap-2 mb-[11px]">
+          <Button color="primary" className="w-full" onClick={doReg}>
+            Зарегистрировать
+          </Button>
           <Button
             color="primary"
-            className="mb-2"
+            className="mb-2 w-full"
             onClick={() => router.push("/panel/login")}
           >
             Вход
-          </Button>
-          <Button color="primary" className="w-full" onClick={doReg}>
-            Зарегистрировать
           </Button>
         </div>
         <center>
