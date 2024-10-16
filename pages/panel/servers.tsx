@@ -99,6 +99,15 @@ export default function MyComponent() {
     checkAuth();
   }, [router]);
 
+  const convertDate = (isoDate) => {
+    const date = new Date(isoDate);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  };
+
   const gotoMain = () => {
     router.push("/panel");
   };
@@ -136,7 +145,7 @@ export default function MyComponent() {
               <SRVCard
                 key={server.id}
                 title={server.name}
-                oplachen={server.payed.toString()} // Convert boolean to string
+                oplachen={convertDate(server.payed.toString())} // Convert boolean to string
                 status={server.status}
                 type="gdps"
               />
@@ -145,7 +154,7 @@ export default function MyComponent() {
               <SRVCard
                 key={bot.id}
                 title={bot.name}
-                oplachen={bot.payed.toString()} // Convert boolean to string
+                oplachen={convertDate(bot.payed.toString())} // Convert boolean to string
                 status={bot.status}
                 type="discord"
               />
