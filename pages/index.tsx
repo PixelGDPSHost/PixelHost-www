@@ -13,100 +13,10 @@ export default function Home() {
         <center>
           <h1 className="text-5xl font-semibold pixelhostbig">ByteNode</h1>
           <p className="font-light text-2xl">
-            Лучший хостинг GDPS и Minecraft серверов с защитой от DDoS
+            ByteNode не откроется.
           </p>
         </center>
       </div>
-      <center className="prekolbg1">
-        <h1 className="text-4xl font-semibold">Тарифы:</h1>
-        <div className="flex w-full flex-col justify-center items-center mt-5">
-          <Tabs aria-label="Options" color="primary" variant="bordered">
-            <Tab key="gdps" title="GDPS">
-              <Card>
-                <CardBody>Скоро, 30.06.2024</CardBody>
-              </Card>
-            </Tab>
-            <Tab key="minecraft" title="Minecraft">
-              <Card>
-                <CardBody>Скоро, 10.11.2024</CardBody>
-              </Card>
-            </Tab>
-            <Tab key="discord" title="Discord">
-              <div className="flexon">
-                <TDCard
-                  ozu="512 MB"
-                  title="Code"
-                  price="29"
-                  backup="1 Бэкап"
-                  db="1 БД"
-                  disk="3 ГБ"
-                  color="#00BA77"
-                ></TDCard>
-                <TDCard
-                  ozu="1 GB"
-                  title="Nexus"
-                  price="39"
-                  backup="1 Бэкап"
-                  db="2 БД"
-                  disk="7 ГБ"
-                  color="#008DBA"
-                ></TDCard>
-                <TDCard
-                  ozu="2 GB"
-                  title="Byte"
-                  price="49"
-                  backup="3 Бэкап"
-                  db="3 БД"
-                  disk="12 ГБ"
-                  color="#6800BA"
-                ></TDCard>
-              </div>
-            </Tab>
-          </Tabs>
-        </div>
-      </center>
-      <center className="flex flex-col items-center prekolbg">
-        <h1 className="text-4xl font-semibold mt-10 mb-[78.2px]">
-          Почему вы должны выбрать нас?
-        </h1>
-        <div className="flexo">
-          <div>
-            <SCard
-              title="DDoS Защита"
-              lower="Все сервера находятся под профессиональной защитой от DDoS на уровнях L3 - L4 и L7"
-              iconimg="Shield.png"
-            ></SCard>
-            <SCard
-              title="Ядро PixelCore"
-              lower="Наше собственное ядро GDPS, поддерживает 2.2, гибкая настройка, своя музыка - и не только"
-              iconimg="Geometry%20Dash.png"
-            ></SCard>
-            <SCard
-              title="Быстрая техподдержка"
-              lower="Мы всегда готовы помочь нашим клиентам в любых трудностях при настройке сервера"
-              iconimg="Ask%20Question.png"
-            ></SCard>
-          </div>
-          <div className="flexoc">
-            <SCard
-              title="Высокий Uptime"
-              lower="Все наши сервера работают 24/7 круглые сутки с айптаймом 99.98%"
-              iconimg="Server%20clocks%20and%20database.png"
-            ></SCard>
-            <SCard
-              title="Простая панель"
-              lower="В нашей удобной и функциональной панели удобная настройка сундуков, ролей, музыки, и т.д."
-              iconimg="Dashboard%20Layout.png"
-            ></SCard>
-            <SCard
-              title="Цена - качество"
-              lower="Качественный хостинг за небольшую цену предоставляет удобную панель, большой функционал, и тому подобное"
-              iconimg="Banknotes.png"
-            ></SCard>
-          </div>
-        </div>
-      </center>
-      <Footer></Footer>
     </main>
   );
 }
