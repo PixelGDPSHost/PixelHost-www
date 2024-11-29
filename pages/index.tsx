@@ -9,12 +9,9 @@ import { useEffect, useState } from "react";
 export default function Home() {
   return (
     <main className="dark text-foreground prekolbg">
-      <div className="skid">
+      <div>
         <center>
-          <h1 className="text-5xl font-semibold pixelhostbig">ByteNode</h1>
-          <p className="font-light text-2xl">
-            ByteNode не откроется.
-          </p>
+          <h1 className="text-5xl font-semibold pixelhostbig">ByteNode will not open</h1>
         </center>
       </div>
     </main>
